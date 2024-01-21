@@ -30,6 +30,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('key');
             $table->text('value')->nullable();
+            $table->tinyInteger('social_media')->default(0);
             $table->timestamps();
         });
         foreach ($array as $item) {

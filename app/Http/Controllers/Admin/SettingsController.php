@@ -46,8 +46,6 @@ class SettingsController extends Controller
         $meta_desc = Settings::where('key' , 'meta_desc')->pluck('value')->first();
         //Links
         $links = Link::latest()->get();
-        //Category
-        $catHeader = Settings::where('key' , 'catHeader')->pluck('value')->first();
         //Payment
         $zarinpal = Settings::where('key' , 'zarinpal')->pluck('value')->first();
         $zibal = Settings::where('key' , 'zibal')->pluck('value')->first();
@@ -88,20 +86,6 @@ class SettingsController extends Controller
         $numberFaraz = Settings::where('key' , 'numberFaraz')->pluck('value')->first();
         //SocialMedia
         $socialMedias = Settings::where('social_media', 1)->latest()->get();
-        //FAB FloatingActionButton
-        $fabs = Fab::all();
-        //Header ADs
-        $heightHeader = Settings::where('key' , 'heightHeader')->pluck('value')->first();
-        $imageHeader = Settings::where('key' , 'imageHeader')->pluck('value')->first();
-        $linkHeader = Settings::where('key' , 'linkHeader')->pluck('value')->first();
-        $adHeaderStatus = Settings::where('key' , 'adHeaderStatus')->pluck('value')->first();
-        //PopUp ADs
-        $imagePopUp = Settings::where('key' , 'imagePopUp')->pluck('value')->first();
-        $titlePopUp = Settings::where('key' , 'titlePopUp')->pluck('value')->first();
-        $addressPopUp = Settings::where('key' , 'addressPopUp')->pluck('value')->first();
-        $popUpStatus = Settings::where('key' , 'popUpStatus')->pluck('value')->first();
-        $descriptionPopUp = Settings::where('key' , 'descriptionPopUp')->pluck('value')->first();
-        $buttonPopUp = Settings::where('key' , 'buttonPopUp')->pluck('value')->first();
 
         return view('admin.settings.index' , compact(
             //Site Data
@@ -126,8 +110,6 @@ class SettingsController extends Controller
             'meta_desc',
             //Links
             'links',
-            //Category
-            'catHeader',
             //Payment
             'zarinpal',
             'zibal',
@@ -168,20 +150,6 @@ class SettingsController extends Controller
             'numberFaraz',
             //SocialMedia
             'socialMedias',
-            //FAB FloatingActionButton
-            'fabs',
-            //HeaderADs
-            'heightHeader',
-            'imageHeader',
-            'linkHeader',
-            'adHeaderStatus',
-            //PopUp
-            'imagePopUp',
-            'titlePopUp',
-            'addressPopUp',
-            'popUpStatus',
-            'descriptionPopUp',
-            'buttonPopUp',
         ));
     }
 
@@ -197,15 +165,6 @@ class SettingsController extends Controller
         $fanavari = $request->fanavari;
         $etemad = $request->etemad;
         $productId = $request->productId;
-        $headerColor = $request->headerColor;
-        $sideColor = $request->sideColor;
-        $giftDis = $request->giftDis;
-        $holidays = json_encode($request->holidays);
-        if ($request->minifySource) {
-            $minifySource = 1;
-        }else{
-            $minifySource = 0;
-        }
 
         $array = [
             'name' => $name,
@@ -218,11 +177,6 @@ class SettingsController extends Controller
             'fanavari' => $fanavari,
             'etemad' => $etemad,
             'productId' => $productId,
-            'holidays' => $holidays,
-            'minifySource' => $minifySource,
-            'headerColor' => $headerColor,
-            'sideColor' => $sideColor,
-            'giftDis' => $giftDis,
         ];
 
         foreach ($array as $key => $item){
@@ -246,22 +200,6 @@ class SettingsController extends Controller
             'meta_desc' =>$meta_desc,
         ];
         foreach ($array as $key=>$item){
-            $setting = Settings::where('key', $key)->first();
-            if ($setting != ''){
-                $setting->update([
-                    'value'=>$item,
-                ]);
-            }
-        }
-        return response()->json();
-    }
-
-    public function categoryUpdate(Request $request)
-    {
-        $array = [
-            'catHeader' => $request->catHeader,
-        ];
-        foreach ($array as $key => $item){
             $setting = Settings::where('key', $key)->first();
             if ($setting != ''){
                 $setting->update([
