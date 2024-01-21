@@ -166,10 +166,10 @@
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
                                 <span class="user-name text-bold-600">{{auth()->user()->name}}</span>
-                                <span class="user-status">{{auth()->user()->email}}</span>
+                                <span class="user-status">{{auth()->user()->email}} - {{auth()->user()->phone}}</span>
                             </div>
                             <span>
-                                <img class="round" src="@if(auth()->user()->profile != '[]'){{asset(json_decode(auth()->user()->profile)[0]->image)}}@else{{asset('images/user.png')}}@endif" alt="{{auth()->user()->name}}" height="40" width="40">
+                                <img class="round" src="{{(auth()->user()->profile)?asset(auth()->user()->profile):''}}" alt="{{auth()->user()->name}}" height="40" width="40">
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

@@ -45,8 +45,17 @@ class MagController extends  Controller
         $request->validate([
             'title' => 'required',
         ]);
-        Mag::create($request->all());
-        return response()->json();
+        $mag = Mag::create([
+            'title' => $request->title,
+            'image' => $request->image,
+            'slug' => $request->slug,
+            'content' => $request['content'],
+            'meta_title' => $request->meta_title,
+            'meta_keyword' => $request->meta_keyword,
+            'meta_desc' => $request->meta_desc,
+        ]);
+        $mag->categories()->sync(json_decode($request->category));
+        $mag->tags()->sync(json_decode($request->tags));
     }
 
     public function show($id)
@@ -58,17 +67,27 @@ class MagController extends  Controller
     public function edit($id)
     {
         $mag = Mag::findOrFail($id);
-        $selectedCategories = array($mag->category);
         $categories = Category::where('type', 'mag')->get();
+        $selectedCats = $mag->categories()->pluck('categories.id')->toArray();
         $tags = Tag::where('type', 'mag')->get();
-        return view('admin.mags.edit', compact('mag', 'categories', 'tags', 'selectedCategories'));
+        $selectedTags = $mag->tags()->pluck('tags.id')->toArray();
+        return view('admin.mags.edit', compact('mag', 'categories', 'tags', 'selectedCats', 'selectedTags'));
     }
 
     public function update(Request $request, $id)
     {
         $mag = Mag::findOrFail($id);
-        $mag->update($request->all());
-        return response()->json();
+        $mag->update([
+            'title' => $request->title,
+            'image' => $request->image,
+            'slug' => $request->slug,
+            'content' => $request['content'],
+            'meta_title' => $request->meta_title,
+            'meta_keyword' => $request->meta_keyword,
+            'meta_desc' => $request->meta_desc,
+        ]);
+        $mag->categories()->sync(json_decode($request->categories));
+        $mag->tags()->sync(json_decode($request->tags));
     }
 
     public function destroy($id)

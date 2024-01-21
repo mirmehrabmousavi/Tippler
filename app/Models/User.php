@@ -51,4 +51,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function category()
+    {
+        return $this->morphToMany(Category::class, 'catables');
+    }
 }

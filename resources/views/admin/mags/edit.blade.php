@@ -71,9 +71,9 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="category">دسته بندی :</label>
-                                        <select name="category" id="category" class="form-control" multiple="multiple">
+                                        <select name="categories" id="category" class="form-control" multiple="multiple">
                                             @foreach($categories as $category)
-                                                <option value="{{$category->name}}" @if(in_array($category->name, $selectedCategories)) selected @endif>{{$category->name}}</option>
+                                                <option value="{{$category->id}}"  {{ in_array($category->id, $selectedCats) ? 'selected' : '' }}>{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -81,9 +81,9 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="tag">برجسب :</label>
-                                        <select name="tag" id="tag" class="form-control" multiple="multiple">
+                                        <select name="tags" id="tag" class="form-control" multiple="multiple">
                                             @foreach($tags as $tag)
-                                                <option value="{{$tag->name}}">{{$tag->name}}</option>
+                                                <option value="{{$tag->id}}" {{ in_array($tag->id, $selectedTags) ? 'selected' : '' }}>{{$tag->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -103,10 +103,22 @@
 @endsection
 
 @section('script')
-    <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
     <script type="text/javascript">
+        let theEditor;
+        ClassicEditor
+            .create( document.querySelector( '#content' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.galleries.ckeditorUpload').'?_token='.csrf_token()}}',
+                },
+                language: 'fa',
+            })
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch( error => {
+
+            } );
         $(document).ready(function () {
-            CKEDITOR.replace('.ckeditor');
             var mag = {!! $mag->toJson() !!};
 
             $.ajaxSetup({
@@ -136,18 +148,6 @@
                     }
                 },
             });
-
-            var cats = []
-            if(mag.category){
-                var selectedValues = map.category
-
-                var selectElement = $('select[name="selectedOptions[]"]');
-                $.each(map.category, function(index, option) {
-                    var isSelected = selectedValues.includes(option.value);
-                    var newOption = new Option(option.text, option.value, isSelected, isSelected);
-                    selectElement.append(newOption).trigger('change');
-                });
-            }
 
             if (mag.image) {
                 $.each(JSON.parse(mag.image), function () {
@@ -190,17 +190,19 @@
                     var type = $(this).find('.type').html()
                     return { name: name, image: image, size: size, type: type };
                 }).get();
-                var categories = $("select[name='category'] :selected").map(function(){
-                    var category = $(this).val()
-                    return {category};
-                }).get();
-                var tags = $("select[name='tag'] :selected").map(function(){
-                    var tag = $(this).val();
-                    return {tag}
-                }).get();
-                var content = CKEDITOR.instances["content"].getData();
+
+                var category = []
+                $("select[name='categories'] :selected").map(function(){
+                    category.push($(this).val());
+                });
+
+                var tag = []
+                $("select[name='tags'] :selected").map(function(){
+                    tag.push($(this).val());
+                });
+                var content = theEditor.getData();
                 var meta_title = $("input[name='meta_title']").val();
-                var meta_keyword = $("input[name='meta_keyword']").val();
+                var meta_keyword = $("textarea[name='meta_keyword']").val();
                 var meta_desc = $("textarea[name='meta_desc']").val();
 
                 $.ajax({
@@ -210,8 +212,8 @@
                         _token: '{{csrf_token()}}',
                         title: title,
                         slug: slug,
-                        category: JSON.stringify(categories),
-                        tag: JSON.stringify(tags),
+                        categories: JSON.stringify(category),
+                        tags: JSON.stringify(tag),
                         image: JSON.stringify(images),
                         content: content,
                         meta_title: meta_title,

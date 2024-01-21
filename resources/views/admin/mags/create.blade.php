@@ -74,9 +74,9 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="category">دسته بندی :</label>
-                                        <select name="category" id="category" class="form-control" multiple="multiple">
+                                        <select name="categories" id="category" class="form-control" multiple="multiple">
                                             @foreach($categories as $category)
-                                                <option value="{{$category->name}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -84,9 +84,9 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="tag">برجسب :</label>
-                                        <select name="tag" id="tag" class="form-control" multiple="multiple">
+                                        <select name="tags" id="tag" class="form-control" multiple="multiple">
                                             @foreach($tags as $tag)
-                                                <option value="{{$tag->name}}">{{$tag->name}}</option>
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -107,8 +107,22 @@
 
 @section('script')
     <script type="text/javascript">
+        let theEditor;
+        ClassicEditor
+            .create( document.querySelector( '#content' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.galleries.ckeditorUpload').'?_token='.csrf_token()}}',
+                },
+                language: 'fa',
+            })
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch( error => {
+
+            } );
+
         $(document).ready(function() {
-            CKEDITOR.replace('.ckeditor');
 
             $("#showMeta").on('click', function () {
                 $('#meta').slideToggle('slow');
@@ -143,24 +157,25 @@
                     return {name: name, image: image, size: size, type: type};
                 }).get();
 
-                var categories = $("select[name='category'] :selected").map(function(){
-                    var category = $(this).val()
-                    return {category};
-                }).get();
+                var tags1 = [];
+                var cats = [];
 
-                var tags = $("select[name='tag'] :selected").map(function(){
-                    var tags = $(this).val();
-                    return {tags}
-                }).get();
+                $("select[name='tags'] :selected").map(function(){
+                    tags1.push($(this).val());
+                });
+
+                $("select[name='categories'] :selected").map(function(){
+                    cats.push($(this).val());
+                });
 
                 var title = $("input[name='title']").val();
                 var slug = $("input[name='slug']").val();
-                var category = categories;
-                var tag = tags;
+                var categories = cats;
+                var tags = tags1;
                 var image = images;
-                var content = CKEDITOR.instances["content"].getData();
+                var content = theEditor.getData();
                 var meta_title = $("input[name='meta_title']").val();
-                var meta_keyword = $("input[name='meta_keyword']").val();
+                var meta_keyword = $("textarea[name='meta_keyword']").val();
                 var meta_desc = $("textarea[name='meta_desc']").val();
 
                 $.ajax({
@@ -170,8 +185,8 @@
                         _token: '{{csrf_token()}}',
                         title: title,
                         slug: slug,
-                        category: JSON.stringify(category),
-                        tag: JSON.stringify(tag),
+                        category: JSON.stringify(categories),
+                        tags: JSON.stringify(tags),
                         image: JSON.stringify(image),
                         content: content,
                         meta_title: meta_title,

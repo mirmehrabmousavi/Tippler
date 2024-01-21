@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('image')->nullable();
             $table->text('slug')->nullable();
-            $table->text('category')->nullable();
-            $table->text('tag')->nullable();
             $table->longText('content')->nullable();
-            $table->longText('tags')->nullable();
             $table->tinyInteger('publish')->default(0);
             $table->longText('meta_title')->nullable();
             $table->longText('meta_keyword')->nullable();

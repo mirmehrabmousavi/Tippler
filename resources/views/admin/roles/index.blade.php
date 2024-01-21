@@ -177,6 +177,9 @@
                                             <br>
                                             <div class="row">
                                                 @foreach($permission as $value)
+                                                    @if(str_contains($value->name, 'delete'))
+                                                        <br><br>
+                                                    @endif
                                                     <div class="col-6">
                                                         <fieldset>
                                                             <div class="custom-control custom-checkbox">

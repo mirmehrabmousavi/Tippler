@@ -71,6 +71,16 @@
                                     <div class="col-6">
                                         @include('admin.galleries.file-manager', ['btn' => 'btn-sm'])
                                     </div>
+                                  {{--  <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="roles">مقام* :</label>
+                                            <select class="form-control" name="user" id="users" multiple>
+                                                <option value="0">کاربر</option>
+                                                <option value="1">فروشنده</option>
+                                                <option value="2">ادمین</option>
+                                            </select>
+                                        </div>
+                                    </div>--}}
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-outline-success btn-sm mr-1 mb-1 waves-effect waves-light">ذخیره</button>
                                     </div>

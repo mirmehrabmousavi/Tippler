@@ -97,8 +97,21 @@
 
 @section('script')
     <script>
+        let theEditor;
+        ClassicEditor
+            .create( document.querySelector( '#main_description' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.galleries.ckeditorUpload').'?_token='.csrf_token()}}',
+                },
+                language: 'fa',
+            })
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch( error => {
+
+            } );
         $(document).ready(function () {
-            CKEDITOR.replace('.ckeditor');
 
             $("#showMeta").on('click', function () {
                 $('#meta').slideToggle('slow');
@@ -112,7 +125,7 @@
                 var slug = $("#main_slug").val();
                 var parent_id = $("#main_parent_id").val();
                 var type = $("#main_type").val();
-                var description = CKEDITOR.instances["main_description"].getData();
+                var description = theEditor.getData();
                 var image = $("#imageContainer #getImagePic").map(function () {
                     var name = $(this).find('.name').html()
                     var image = $(this).find('img').attr('src')

@@ -29,16 +29,25 @@ Auth::routes();
 //User
 Route::group(['as' => 'user.', 'middleware' => ['auth', 'user']], function() {
     //Dashboard
-    Route::get('/home', [\App\Http\Controllers\User\UserController::class, 'index'])->name('home');
+    Route::get('/dashboard', [\App\Http\Controllers\User\UserController::class, 'index'])->name('dashboard');
+});
+
+//User
+Route::group(['as' => 'manager.', 'middleware' => ['auth', 'manager']], function() {
+    //Dashboard
+    Route::get('/dashboard', [\App\Http\Controllers\Manager\ManagerController::class, 'index'])->name('dashboard');
 });
 
 //Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function() {
     //Dashboard
-    Route::get('/home', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('home');
-    //FAQ
-    Route::resource('faqs', \App\Http\Controllers\Admin\FAQController::class);
-    Route::delete('/faqs/destroy/all', [\App\Http\Controllers\Admin\FAQController::class, 'destroyAll'])->name('faqs.destroyAll');
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
+    //Categories
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::post('/categories/save-nested-categories', [\App\Http\Controllers\Admin\CategoryController::class, 'saveNestedCategories'])->name('categories.saveNestedCategories');
+    //Tags
+    Route::resource('tags', \App\Http\Controllers\Admin\TagController::class);
+    Route::delete('/tags/destroy/all', [\App\Http\Controllers\Admin\TagController::class, 'destroyAll'])->name('tags.destroyAll');
     //Pages
     Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
     Route::post('/pages/confirm/{id}', [\App\Http\Controllers\Admin\PageController::class, 'confirm'])->name('pages.confirm');
@@ -47,6 +56,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::resource('mags', \App\Http\Controllers\Admin\MagController::class);
     Route::post('/mags/confirm/{id}', [\App\Http\Controllers\Admin\MagController::class, 'confirm'])->name('mags.confirm');
     Route::delete('/mags/destroy/all', [\App\Http\Controllers\Admin\MagController::class, 'destroyAll'])->name('mags.destroyAll');
+    //FAQ
+    Route::resource('faqs', \App\Http\Controllers\Admin\FAQController::class);
+    Route::delete('/faqs/destroy/all', [\App\Http\Controllers\Admin\FAQController::class, 'destroyAll'])->name('faqs.destroyAll');
     //Users
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::delete('/users/destroy/all', [\App\Http\Controllers\Admin\UserController::class, 'destroyAll'])->name('users.destroyAll');
@@ -71,6 +83,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
         Route::post('/upload', [\App\Http\Controllers\Admin\GalleryController::class, 'upload'])->name('upload');
         Route::delete('/{id}/delete', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('destroy');
         Route::delete('/destroy/all', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyAll'])->name('destroyAll');
+        //CKEditor Upload Method
+        Route::post('/ckeditor/upload', [\App\Http\Controllers\Admin\GalleryController::class, 'ckeditorUpload'])->name('ckeditorUpload');
     });
     //Settings
     Route::group(['as' => 'settings.', 'prefix' => 'settings'], function () {

@@ -54,7 +54,7 @@
                                         </fieldset>
                                     </td>
                                     <td>{{$loop->index+1}}</td>
-                                    <td>{{$page->title}}</td>
+                                    <td><a href="#">{{$page->title}}</a></td>
                                     <td class="p-1">
                                         <ul class="list-unstyled users-list m-0  d-flex align-items-center">
                                             <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="{{$page->title}}" class="avatar pull-up">

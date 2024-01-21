@@ -87,4 +87,18 @@ class  GalleryController extends Controller
         }
         return response()->json(['success'=>"Products Deleted successfully."]);
     }
+
+    public function ckeditorUpload(Request $request)
+    {
+        $siteName = Settings::where('key', 'name')->pluck('value')->first();
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = ($siteName != '')?$siteName:env('APP_NAME').'_'.time().'.'.$extension;
+            $request->file('upload')->move($_SERVER['DOCUMENT_ROOT'].'/uploads/'.now()->year.'/', $fileName);
+            $url = asset('uploads/'.now()->year.'/' . $fileName);
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
+    }
 }

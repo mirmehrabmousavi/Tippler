@@ -6,7 +6,7 @@
 @section('content')
     <h4>افزودن برگه</h4>
     <div class="row">
-        <div class="col-md-12 col-12">
+        <div class="col-md-8 col-8">
             <div class="card">
                 <div class="card-header"></div>
                 <div class="card-content">
@@ -64,6 +64,29 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 col-4">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="tag">برجسب :</label>
+                                        <select name="tags" id="tag" class="form-control" multiple="multiple">
+                                            @foreach($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -74,11 +97,34 @@
 
 @section('script')
     <script type="text/javascript">
+        let theEditor;
+        ClassicEditor
+            .create( document.querySelector( '#content' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.galleries.ckeditorUpload').'?_token='.csrf_token()}}',
+                },
+                language: 'fa',
+            })
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch( error => {
+
+            } );
+
         $(document).ready(function() {
-            CKEDITOR.replace('.ckeditor');
 
             $("#showMeta").on('click', function () {
                 $('#meta').slideToggle('slow');
+            });
+
+            $('#tag').select2({
+                placeholder: 'برچسب را انتخاب کنید ...',
+                "language": {
+                    "noResults": function () {
+                        return "موردی پیدا نشد";
+                    }
+                },
             });
 
             $("#createPage").click(function (event) {
@@ -92,12 +138,19 @@
                     return {name: name, image: image, size: size, type: type};
                 }).get();
 
+                var tags1 = [];
+
+                $("select[name='tags'] :selected").map(function(){
+                    tags1.push($(this).val());
+                });
+
                 var title = $("input[name='title']").val();
                 var slug = $("input[name='slug']").val();
                 var image = images;
-                var content = CKEDITOR.instances["content"].getData();
+                var tags = tags1;
+                var content = theEditor.getData();
                 var meta_title = $("input[name='meta_title']").val();
-                var meta_keyword = $("input[name='meta_keyword']").val();
+                var meta_keyword = $("textarea[name='meta_keyword']").val();
                 var meta_desc = $("textarea[name='meta_desc']").val();
 
                 $.ajax({
@@ -108,6 +161,7 @@
                         title: title,
                         slug: slug,
                         image: JSON.stringify(image),
+                        tags: JSON.stringify(tags),
                         content: content,
                         meta_title: meta_title,
                         meta_keyword: meta_keyword,

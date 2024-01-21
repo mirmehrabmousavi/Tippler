@@ -59,7 +59,7 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-            @include('notification.notification')
+            @include('notifications.notification')
             @yield('content')
         </div>
     </div>
@@ -87,7 +87,8 @@
 <!-- BEGIN: Page JS-->
 <script src="{{asset('admin/app-assets/js/scripts/popover/popover.js')}}"></script>
 <!-- END: Page JS-->
-<script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script src="{{asset('admin/app-assets/js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('admin/app-assets/js/ckeditor/translations/fa.js')}}"></script>
 <script src="{{asset('js/select2.min.js')}}"></script>{{--
 <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>--}}
 <script src="{{asset('js/kamadatepicker.min.js')}}"></script>

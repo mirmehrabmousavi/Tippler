@@ -72,7 +72,7 @@
                                     </script>
                                     <td>{{$loop->index+1}}</td>
                                     <td>{{$tag->name}}</td>
-                                    <td><span class="badge" style="background: {{($tag->type == 'product')? '#0288D1' : '#D32F2F'}}">{{($tag->type == 'product')? 'محصول' : 'مقاله'}}</span></td>
+                                    <td><span class="badge" style="background: {{($tag->type == 'product')? 'darkblue' : ''}}{{($tag->type == 'mag')? 'darkred' : ''}}{{($tag->type == 'page')? 'darkgreen' : ''}}">{{($tag->type == 'product')? 'محصول' : ''}}{{ ($tag->type == 'mag')? 'مقاله': ''}} {{($tag->type == 'page')? 'صفحه': ''}}</span></td>
                                     <td>{{jdate($tag->created_at)->ago()}}</td>
                                     <td>
                                         <a class="text-secondary mr-1 waves-effect waves-light" data-toggle="modal" data-target="#show-{{$tag->id}}"><i class="feather icon-eye"></i></a>
@@ -263,6 +263,7 @@
                                             <select name="type" id="main_type" class="form-control @error('type') is-invalid @enderror">
                                                 <option value="product">محصول</option>
                                                 <option value="mag">مقاله</option>
+                                                <option value="page">صفحه</option>
                                             </select>
                                         </div>
                                     </div>
@@ -314,6 +315,20 @@
 
 @section('script')
     <script type="text/javascript">
+        let theEditor;
+        ClassicEditor
+            .create( document.querySelector( '#main_description' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.galleries.ckeditorUpload').'?_token='.csrf_token()}}',
+                },
+                language: 'fa',
+            })
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch( error => {
+
+            } );
         $(document).ready(function () {
             $('.delete_all').hide();
 
@@ -334,7 +349,7 @@
                 var name = $("#main_name").val();
                 var slug = $("#main_slug").val();
                 var type = $("#main_type").val();
-                var description = CKEDITOR.instances["main_description"].getData();
+                var description = theEditor.getData();
                 var image = $("#imageContainer #getImagePic").map(function () {
                     var name = $(this).find('.name').html()
                     var image = $(this).find('img').attr('src')

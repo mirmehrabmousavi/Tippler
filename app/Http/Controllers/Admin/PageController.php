@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,8 @@ class PageController extends Controller
 
     public function create()
     {
-        return view('admin.pages.create');
+        $tags = Tag::where('type', 'page')->get();
+        return view('admin.pages.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -40,8 +42,16 @@ class PageController extends Controller
         $request->validate([
             'title' => 'required',
         ]);
-        Page::create($request->all());
-        return response()->json();
+        $page = Page::create([
+            'title' => $request->title,
+            'image' => $request->image,
+            'slug' => $request->slug,
+            'content' => $request['content'],
+            'meta_title' => $request->meta_title,
+            'meta_keyword' => $request->meta_keyword,
+            'meta_desc' => $request->meta_desc,
+        ]);
+        $page->tags()->sync(json_decode($request->tags));
     }
 
     public function show($id)
@@ -53,14 +63,24 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Page::findOrFail($id);
-        return view('admin.pages.edit', compact('page'));
+        $tags = Tag::where('type', 'page')->get();
+        $selectedTags = $page->tags()->pluck('tags.id')->toArray();
+        return view('admin.pages.edit', compact('page', 'tags', 'selectedTags'));
     }
 
     public function update(Request $request, $id)
     {
         $page = Page::findOrFail($id);
-        $page->update($request->all());
-        return response()->json();
+        $page->update([
+            'title' => $request->title,
+            'image' => $request->image,
+            'slug' => $request->slug,
+            'content' => $request['content'],
+            'meta_title' => $request->meta_title,
+            'meta_keyword' => $request->meta_keyword,
+            'meta_desc' => $request->meta_desc,
+        ]);
+        $page->tags()->sync(json_decode($request->tags));
     }
 
     public function destroy($id)

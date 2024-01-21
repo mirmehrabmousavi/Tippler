@@ -56,7 +56,7 @@
                                                <div class="col-1 d-flex align-items-center">
                                                    <ul class="list-unstyled users-list m-0  d-flex align-items-center align-content-center">
                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="{{$user->name}}" class="avatar pull-up">
-                                                           <img class="media-object rounded-circle" src="@if($user->profile != '[]') {{asset(json_decode($user->profile)[0]->image)}} @else {{asset('images/user.png')}} @endif" alt="Avatar" height="60" width="60">
+                                                           <img class="media-object rounded-circle" src="{{asset($user->profile)}}" alt="Avatar" height="60" width="60">
                                                        </li>
                                                    </ul>
                                                </div>
@@ -96,7 +96,7 @@
                                                             <div class="row d-flex justify-content-center">
                                                                 <ul class="list-unstyled users-list" style="height: 60px; width: 60px;">
                                                                     <li class="avatar pull-up m-0">
-                                                                        <img class="media-object rounded-circle" src="@if($user->profile != '[]') {{asset(json_decode($user->profile)[0]->image)}} @else {{asset('images/user.png')}} @endif" alt="Avatar" height="60" width="60">
+                                                                        <img class="media-object rounded-circle" src="{{asset($user->profile)}}" alt="Avatar" height="60" width="60">
                                                                     </li>
                                                                 </ul>
                                                                 <div class="col-12" style="margin-top: 5px;">
