@@ -112,6 +112,12 @@ class UserController extends Controller
             ->with('success','User deleted successfully');
     }
 
+    public function promote(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        //$user
+    }
+
     public function destroyAll(Request $request)
     {
         $ids = $request->ids;

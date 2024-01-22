@@ -67,6 +67,40 @@
                                                                 <span class="mx-1">آیدی کاربر : {{$user->id}}</span>
                                                                 <span class="mx-1">uuid : {{$user->uuid}}</span>
                                                                 <span class="mx-2">نام : {{$user->name}}</span>
+                                                                <span class="mx-2">
+                                                                    <a class="btn btn-sm btn-outline-secondary text-white" data-toggle="modal" data-target="#promote-{{$user->id}}">ارتقا کاربر <i class="fa fa-user-plus"></i></a>
+                                                                    <div class="modal fade text-left" id="promote-{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true" style="display: none;">
+                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header bg-secondary white">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                        <div class="form-body">
+                                                                                            <div class="row">
+                                                                                                <form action="{{route('admin.users.promote')}}" method="POST">
+                                                                                            @csrf
+                                                                                             <div class="col-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="promote">ارتقا* :</label>
+                                                                                                    <select class="form-control" name="promote" id="promote">
+                                                                                                            <option value="manager">فروشنده</option>
+                                                                                                            <option value="admin">ادمین</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <button type="submit" class="btn btn-outline-success btn-sm mr-1 mb-1 waves-effect waves-light">ذخیره</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <div class="modal-footer"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </span>
                                                             </p>
                                                             <p class="mt-1 w-100 alert alert-secondary">
                                                                 <span class="mx-1">نام کاربری : {{$user->username}}</span>
