@@ -115,7 +115,24 @@ class UserController extends Controller
     public function promote(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        //$user
+        if ($request->promote == 'user') {
+            $user->update([
+                'manager' => 0,
+                'admin' => 0
+            ]);
+            return redirect(route('admin.users.index'))->with('success', 'کاربر به کاربرعادی نزول یافت.');
+        }elseif($request->promote == 'manager') {
+            $user->update([
+                'manager' => 1
+            ]);
+            return redirect(route('admin.users.index'))->with('success', 'کاربر به فروشنده ارتقا یافت.');
+        }elseif($request->promote == 'admin') {
+            $user->update([
+                'admin' => 1
+            ]);
+            return redirect(route('admin.users.index'))->with('success', 'کاربر به ادمین ارتقا یافت.');
+        }
+        return redirect(route('admin.users.index'))->with('error', 'لطفا بعدا امتحان کنید.');
     }
 
     public function destroyAll(Request $request)

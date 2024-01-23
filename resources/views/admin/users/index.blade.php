@@ -76,26 +76,27 @@
                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
+                                                                                    <form class="form" action="{{route('admin.users.promote', [$user->id])}}" method="POST">
+                                                                                        @csrf
                                                                                         <div class="form-body">
                                                                                             <div class="row">
-                                                                                                <form action="{{route('admin.users.promote')}}" method="POST">
-                                                                                            @csrf
-                                                                                             <div class="col-12">
-                                                                                                <div class="form-group">
-                                                                                                    <label for="promote">ارتقا* :</label>
-                                                                                                    <select class="form-control" name="promote" id="promote">
-                                                                                                            <option value="manager">فروشنده</option>
-                                                                                                            <option value="admin">ادمین</option>
-                                                                                                    </select>
+                                                                                                <div class="col-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="promote">ارتقا* :</label>
+                                                                                                        <select name="promote" id="promote" class="form-control">
+                                                                                                            <option value="user">User</option>
+                                                                                                            <option value="manager">Manager</option>
+                                                                                                            <option value="admin">Admin</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <button type="submit" class="btn btn-outline-success btn-sm mr-1 mb-1 waves-effect waves-light">ارتقای کابر <i class="fa fa-user-plus"></i></button>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="col-12">
-                                                                                                <button type="submit" class="btn btn-outline-success btn-sm mr-1 mb-1 waves-effect waves-light">ذخیره</button>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    </form>
+                                                                                </div>
                                                                                 <div class="modal-footer"></div>
                                                                             </div>
                                                                         </div>

@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::delete('/faqs/destroy/all', [\App\Http\Controllers\Admin\FAQController::class, 'destroyAll'])->name('faqs.destroyAll');
     //Users
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-    Route::post('/users/promote', [\App\Http\Controllers\Admin\UserController::class, 'promote'])->name('users.promote');
+    Route::post('/users/promote/{id}', [\App\Http\Controllers\Admin\UserController::class, 'promote'])->name('users.promote');
     Route::delete('/users/destroy/all', [\App\Http\Controllers\Admin\UserController::class, 'destroyAll'])->name('users.destroyAll');
     //Roles & Permissions
     Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class);
