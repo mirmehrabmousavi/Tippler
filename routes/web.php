@@ -94,11 +94,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
         //CKEditor Upload Method
         Route::post('/ckeditor/upload', [\App\Http\Controllers\Admin\GalleryController::class, 'ckeditorUpload'])->name('ckeditorUpload');
     });
-    //LargeFile Upload
-    Route::group(['as' => 'file.', 'prefix' => 'file'], function () {
-        Route::get('/', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('index');
-
-    });
     //Settings
     Route::group(['as' => 'settings.', 'prefix' => 'settings'], function () {
         Route::get('/', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('index');

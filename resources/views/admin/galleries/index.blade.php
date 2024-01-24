@@ -8,14 +8,14 @@
                     <div class="col-md-12 mb-2 mb-md-0">
                         <ul class="nav nav-pills flex-row mt-md-0 mt-1">
                             <li class="nav-item w-50">
-                                <a class="nav-link d-flex py-75 active" id="product" data-toggle="pill" href="#products"
+                                <a class="nav-link d-flex py-75 active" id="image" data-toggle="pill" href="#images"
                                    aria-expanded="true">
                                     <i class="fa fa-picture-o mr-50 font-medium-3"></i>
                                     گالری تصاویر
                                 </a>
                             </li>
                             <li class="nav-item w-50">
-                                <a class="nav-link d-flex py-75" id="mag" data-toggle="pill" href="#mags"
+                                <a class="nav-link d-flex py-75" id="file" data-toggle="pill" href="#files"
                                    aria-expanded="false">
                                     <i class="fa fa-file-excel-o mr-50 font-medium-3"></i>
                                     فایل های حجیم
@@ -29,8 +29,8 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active show" role="tabpanel" id="products"
-                                             aria-labelledby="product" aria-expanded="true">
+                                        <div class="tab-pane active show" role="tabpanel" id="images"
+                                             aria-labelledby="image" aria-expanded="true">
                                             <div class="card">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -164,7 +164,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="tab-pane" role="tabpanel" id="mags" aria-labelledby="mag"
+                                        <div class="tab-pane" role="tabpanel" id="files" aria-labelledby="file"
                                              aria-expanded="false">
                                             <div class="card">
                                                 <form id="uploadForm" action="{{route('admin.galleries.uploadFile')}}" method="POST" enctype="multipart/form-data">
