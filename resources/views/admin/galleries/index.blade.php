@@ -169,6 +169,14 @@
                                             <div class="card">
                                                 <form id="uploadForm" action="{{route('admin.galleries.uploadFile')}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
+
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="name">نام فایل* :</label>
+                                                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="نام فایل را وارد کنید" required>
+                                                        </div>
+                                                    </div>
+
                                                     <input type="file" class="dropify" name="file" id="fileInput">
                                                     <button type="submit" id="btnUpload" class="btn btn-outline-success waves-effect mt-1"><i class="fa fa-upload"></i> بارگذاری اطلاعات</button>
                                                 </form>
@@ -460,10 +468,12 @@
             uploadForm.submit(function(e) {
                 e.preventDefault();
 
+                var nameInput = $('input[name="name"]').val();
                 var fileInput = $('#fileInput')[0].files[0];
 
                 if (fileInput) {
                     var formData = new FormData();
+                    formData.append('name', nameInput);
                     formData.append('file', fileInput);
                     formData.append('_token', $('meta[name="csrf-token"]').attr('content')); // Include CSRF token
 
