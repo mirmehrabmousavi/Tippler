@@ -36,7 +36,7 @@
                                                     <div class="col-12">
                                                         <div class="card">
                                                             <div class="card-header">
-                                                                <h4 class="card-title">فایل هات رو اینجا آپلود کن</h4>
+                                                                <h4 class="card-title">عکس هات رو اینجا آپلود کن</h4>
                                                                 <p class="text-left float-left">تعداد تصاویر : <span class="badge badge-primary rounded-pill">{{count($galleries)}}</span></p>
                                                             </div>
                                                             <div class="card-content">
