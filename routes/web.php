@@ -94,16 +94,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
         Route::post('/seo', [\App\Http\Controllers\Admin\SettingsController::class, 'seoUpdate'])->name('seoUpdate');
         Route::post('/links', [\App\Http\Controllers\Admin\LinkController::class, 'store'])->name('links.store');
         Route::delete('/links/{id}', [\App\Http\Controllers\Admin\LinkController::class, 'destroy'])->name('links.destroy');
-        Route::post('/category', [\App\Http\Controllers\Admin\SettingsController::class, 'categoryUpdate'])->name('categoryUpdate');
         Route::post('/payment', [\App\Http\Controllers\Admin\SettingsController::class, 'paymentUpdate'])->name('paymentUpdate');
         Route::post('/sms', [\App\Http\Controllers\Admin\SettingsController::class, 'smsUpdate'])->name('smsUpdate');
         Route::post('/socialMedia', [\App\Http\Controllers\Admin\SettingsController::class, 'socialMediaStore'])->name('socialMediaStore');
         Route::patch('/socialMedia/{id}', [\App\Http\Controllers\Admin\SettingsController::class, 'socialMediaUpdate'])->name('socialMediaUpdate');
         Route::delete('/socialMedia/{id}', [\App\Http\Controllers\Admin\SettingsController::class, 'socialMediaDestroy'])->name('socialMediaDestroy');
-        Route::post('/fab', [\App\Http\Controllers\Admin\SettingsController::class, 'fabStore'])->name('fabStore');
-        Route::patch('/fab/{id}', [\App\Http\Controllers\Admin\SettingsController::class, 'fabUpdate'])->name('fabUpdate');
-        Route::delete('/fab/{id}', [\App\Http\Controllers\Admin\SettingsController::class, 'fabDestroy'])->name('fabDestroy');
-        Route::post('/headerAds', [\App\Http\Controllers\Admin\SettingsController::class, 'headerAdsUpdate'])->name('headerAdsUpdate');
-        Route::post('/popup', [\App\Http\Controllers\Admin\SettingsController::class, 'popupUpdate'])->name('popupUpdate');
     });
 });

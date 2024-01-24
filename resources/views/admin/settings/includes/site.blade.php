@@ -29,14 +29,6 @@
             <div class="col-6">
                 <div class="form-group">
                     <div class="controls">
-                        <label for="site-giftDis">حداکثر کد تخفیف در جعبه جادویی : </label>
-                        <input type="text" class="form-control" name="giftDis" id="site-giftDis" placeholder="مثال : 2" value="{{$giftDis}}">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <div class="controls">
                         <label for="site-address">آدرس سایت : </label>
                         <input type="text" class="form-control" name="address" id="site-address" placeholder="آدرس سایت را وارد کنید" value="{{$address}}">
                     </div>
@@ -69,22 +61,6 @@
             <div class="col-6">
                 <div class="form-group">
                     <div class="controls">
-                        <label for="site-headerColor">رنگ هدر : </label>
-                        <input type="text" class="form-control" name="headerColor" id="site-headerColor" placeholder="رنگ هدر را وارد کنید" value="{{$headerColor}}">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <div class="controls">
-                        <label for="site-sideColor">رنگ ساید بار : </label>
-                        <input type="text" class="form-control" name="sideColor" id="site-sideColor" placeholder="رنگ سایدبار را وارد کنید" value="{{$sideColor}}">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <div class="controls">
                         <label for="site-number">شماره تماس : </label>
                         <input type="text" class="form-control" name="number" id="site-number" placeholder="شماره تماس را وارد کنید" value="{{$number}}">
                     </div>
@@ -104,29 +80,6 @@
                         <label for="site-about">درباره ما : </label>
                         <textarea class="form-control" name="about" id="site-about" placeholder="درباره ما را وارد کنید">{{$about}}</textarea>
                     </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <div class="controls">
-                        <label for="site-holidays">روز های تعطیل هفته : </label>
-                        <select id="site-holidays" class="form-control w-100" name="holidays" multiple="multiple">
-                            <option value="1">شنبه</option>
-                            <option value="2">یکشنبه</option>
-                            <option value="3">دوشنبه</option>
-                            <option value="4">سه شنبه</option>
-                            <option value="5">چهارشنبه</option>
-                            <option value="6">پنجشنبه</option>
-                            <option value="7">جمعه</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="custom-control custom-switch custom-control-inline">
-                    <input type="checkbox" name="minifySource" class="custom-control-input" id="site-minifySource">
-                    <label class="custom-control-label" for="site-minifySource"></label>
-                    <span class="switch-label">فشرده سازی سورس کد</span>
                 </div>
             </div>
             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
@@ -154,7 +107,6 @@
             var name = $("#site-name").val();
             var title = $("#site-title").val();
             var logo = $("#site-logo").val();
-            var giftDis = $("#site-giftDis").val();
             var about = $("#site-about").val();
             var address = $("#site-address").val();
             var email = $("#site-email").val();
@@ -162,14 +114,6 @@
             var fanavari = $("#site-fanavari").val();
             var etemad = $("#site-etemad").val();
             var productId = $("#site-productId").val();
-            var headerColor = $("#site-headerColor").val();
-            var sideColor = $("#site-sideColor").val();
-            var minifySource = $("#site-minifySource").val();
-            var holidays = $("select[name='holidays'] :selected").map(function(){
-                var holiday = $(this).val()
-                return {holiday};
-            }).get();
-
             $.ajax({
                 url: "{{route('admin.settings.siteUpdate')}}",
                 type: "post",
@@ -178,18 +122,13 @@
                     name: name,
                     title: title,
                     logo: logo,
-                    giftDis: giftDis,
                     about: about,
                     address: address,
                     email: email,
                     number: number,
                     fanavari: fanavari,
                     etemad: etemad,
-                    headerColor: headerColor,
-                    sideColor: sideColor,
                     productId: productId,
-                    holidays: JSON.stringify(holidays),
-                    minifySource: minifySource,
                 },
                 success: function (data) {
                     toastr.success('با موفقیت ذخیره شد.');

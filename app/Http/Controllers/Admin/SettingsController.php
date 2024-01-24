@@ -35,11 +35,6 @@ class SettingsController extends Controller
         $fanavari = Settings::where('key' , 'fanavari')->pluck('value')->first();
         $etemad = Settings::where('key' , 'etemad')->pluck('value')->first();
         $productId = Settings::where('key' , 'productId')->pluck('value')->first();
-        $minifySource = Settings::where('key' , 'minifySource')->pluck('value')->first();
-        $headerColor = Settings::where('key' , 'headerColor')->pluck('value')->first();
-        $sideColor = Settings::where('key' , 'sideColor')->pluck('value')->first();
-        $giftDis = Settings::where('key' , 'giftDis')->pluck('value')->first();
-        $holidays = Settings::where('key' , 'holidays')->pluck('value')->first();
         //SEO
         $meta_title = Settings::where('key' , 'meta_title')->pluck('value')->first();
         $meta_keyword = Settings::where('key' , 'meta_keyword')->pluck('value')->first();
@@ -99,11 +94,6 @@ class SettingsController extends Controller
             'fanavari',
             'etemad',
             'productId',
-            'minifySource',
-            'headerColor',
-            'sideColor',
-            'giftDis',
-            'holidays',
             //SEO
             'meta_title',
             'meta_keyword',
@@ -382,87 +372,5 @@ class SettingsController extends Controller
         $settings = Settings::findOrFail($id);
         $settings->delete();
         return redirect(route('admin.settings.index', ['tab=social-media']))->with('success', 'با موفقیت حذف  شد.');
-    }
-
-    public function fabStore(Request $request)
-    {
-        $request->validate([
-           'title' => 'required',
-           'link' => 'required',
-           'icon' => 'required',
-           'type' => 'required',
-        ]);
-        Fab::create([
-            'title' => $request->title,
-            'link' => $request->link,
-            'icon' => $request->icon,
-            'type' => $request->type,
-        ]);
-        return redirect(route('admin.settings.index', ['tab=fab']))->with('success', 'با موفقیت ذخیره شد');
-    }
-
-    public function fabUpdate(Request $request, $id)
-    {
-       $fab = Fab::findOrFail($id);
-       $fab->update([
-            'title' => $request->title,
-            'link' => $request->link,
-            'icon' => $request->icon,
-            'type' => $request->type,
-        ]);
-        return redirect(route('admin.settings.index', ['tab=fab']))->with('success', 'با موفقیت بروزرسانی شد');
-    }
-
-    public function fabDestroy($id)
-    {
-        $fab = Fab::findOrFail($id);
-        $fab->delete();
-        return redirect(route('admin.settings.index', ['tab=fab']))->with('success', 'با موفقیت حذف شد');
-    }
-
-    public function headerAdsUpdate(Request $request)
-    {
-        $heightHeader = $request->heightHeader;
-        $imageHeader = $request->imageHeader;
-        $linkHeader = $request->linkHeader;
-        $adHeaderStatus = $request->adHeaderStatus;
-        $array = [
-            'heightHeader' => $heightHeader,
-            'imageHeader' => $imageHeader,
-            'linkHeader' => $linkHeader,
-            'adHeaderStatus' => $adHeaderStatus,
-        ];
-        foreach ($array as $key => $item){
-            $setting = Settings::where('key' , $key)->first();
-            if ($setting != ''){
-                $setting->update(['value' => $item]);
-            }
-        }
-        return response()->json();
-    }
-
-    public function popupUpdate(Request $request)
-    {
-        $imagePopUp = $request->imagePopUp;
-        $titlePopUp = $request->titlePopUp;
-        $addressPopUp = $request->addressPopUp;
-        $popUpStatus = $request->popUpStatus;
-        $descriptionPopUp = $request->descriptionPopUp;
-        $buttonPopUp = $request->buttonPopUp;
-        $array = [
-            'imagePopUp' => $imagePopUp,
-            'titlePopUp' => $titlePopUp,
-            'addressPopUp' => $addressPopUp,
-            'popUpStatus' => $popUpStatus,
-            'descriptionPopUp' => $descriptionPopUp,
-            'buttonPopUp' => $buttonPopUp,
-        ];
-        foreach ($array as $key => $item){
-            $setting = Settings::where('key' , $key)->first();
-            if ($setting != ''){
-                $setting->update(['value' => $item]);
-            }
-        }
-        return response()->json();
     }
 }
