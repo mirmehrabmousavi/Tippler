@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('url');
             $table->string('size');
+            $table->tinyInteger('file')->default(0);
             $table->timestamps();
         });
     }

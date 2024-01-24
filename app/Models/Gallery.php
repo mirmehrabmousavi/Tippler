@@ -17,5 +17,6 @@ class Gallery extends Model
         'path',
         'url',
         'size',
+        'file',
     ];
 }
