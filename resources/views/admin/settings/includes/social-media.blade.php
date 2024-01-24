@@ -8,10 +8,10 @@
                     <div class="controls">
                         <label for="key">شبکه اجتماعی خودتو انتخاب کن : </label>
                         <select class="form-control select2" name="key" id="key">
-                            @php $fontAwesomes = \App\Models\FontAwesome::all(); @endphp
-                            @foreach($fontAwesomes as $item)
-                                <option value="{{$item->icon}}">{{$item->icon}}</option>
-                            @endforeach
+                               <option value="call">Call</option>
+                               <option value="instagram">Instagram</option>
+                               <option value="telegram">Telegram</option>
+                               <option value="whatsapp">Whatsapp</option>
                         </select>
                     </div>
                 </div>
@@ -88,9 +88,10 @@
                                                                 <div class="controls">
                                                                     <label for="key">شبکه اجتماعی خودتو انتخاب کن : </label>
                                                                     <select class="form-control" name="key" id="key">
-                                                                        @foreach($fontAwesomes as $item)
-                                                                            <option value="{{$item->icon}}">{{$item->icon}}</option>
-                                                                        @endforeach
+                                                                        <option value="call">Call</option>
+                                                                        <option value="instagram">Instagram</option>
+                                                                        <option value="telegram">Telegram</option>
+                                                                        <option value="whatsapp">Whatsapp</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

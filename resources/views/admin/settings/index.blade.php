@@ -28,13 +28,6 @@
                         </a>
                     </li>
                     <li class="nav-item" style="margin-bottom: 5px;">
-                        <a class="nav-link d-flex py-75 {{(request()->tab == 'category')? 'active' : ''}}" id="settings-category" data-toggle="pill"
-                           href="#category" aria-expanded="true">
-                            <i class="fa fa-list-ul mr-50 font-medium-3"></i>
-                            تنظیمات دسته بندی
-                        </a>
-                    </li>
-                    <li class="nav-item" style="margin-bottom: 5px;">
                         <a class="nav-link d-flex py-75 {{(request()->tab == 'payment')? 'active' : ''}}" id="settings-payment" data-toggle="pill"
                            href="#payment" aria-expanded="true">
                             <i class="fa fa-dollar mr-50 font-medium-3"></i>
@@ -55,27 +48,6 @@
                             تنظیمات شبکه های اجتماعی
                         </a>
                     </li>
-                    <li class="nav-item" style="margin-bottom: 5px;">
-                        <a class="nav-link d-flex py-75 {{(request()->tab == 'fab')? 'active' : ''}}" id="settings-fab" data-toggle="pill"
-                           href="#fab" aria-expanded="true">
-                            <i class="fa fa-hand-lizard-o mr-50 font-medium-3"></i>
-                            تنظیمات دکمه شناور
-                        </a>
-                    </li>
-                    <li class="nav-item" style="margin-bottom: 5px;">
-                        <a class="nav-link d-flex py-75 {{(request()->tab == 'headerAds')? 'active' : ''}}" id="settings-header-ads" data-toggle="pill"
-                           href="#headerAds" aria-expanded="true">
-                            <i class="fa fa-window-minimize mr-50 font-medium-3"></i>
-                            تبلیغ بالای هدر
-                        </a>
-                    </li>
-                    <li class="nav-item" style="margin-bottom: 5px;">
-                        <a class="nav-link d-flex py-75 {{(request()->tab == 'popup')? 'active' : ''}}" id="settings-popup" data-toggle="pill"
-                           href="#popup" aria-expanded="false">
-                            <i class="fa fa-window-maximize mr-50 font-medium-3"></i>
-                            تنظیمات PopUp صفحه اصلی
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- right content section -->
@@ -90,20 +62,12 @@
                                 @include('admin.settings.includes.seo')
                                 {{--HeadrLinks--}}
                                 @include('admin.settings.includes.links')
-                                {{--Category--}}
-                                @include('admin.settings.includes.category')
                                 {{--Payment--}}
                                 @include('admin.settings.includes.payment')
                                 {{--SMS--}}
                                 @include('admin.settings.includes.sms')
                                 {{--SocialMedia--}}
                                 @include('admin.settings.includes.social-media')
-                                {{--FloatingActionButton--}}
-                                @include('admin.settings.includes.fab')
-                                {{--HedaerADs--}}
-                                @include('admin.settings.includes.header-ads')
-                                {{--PopUp--}}
-                                @include('admin.settings.includes.popup')
                             </div>
                         </div>
                     </div>
