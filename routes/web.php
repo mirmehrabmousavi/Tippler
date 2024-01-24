@@ -83,11 +83,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
         Route::get('/getLastImage', [\App\Http\Controllers\Admin\GalleryController::class, 'getLastImage'])->name('getLastImage');
         //Upload Image
         Route::post('/upload', [\App\Http\Controllers\Admin\GalleryController::class, 'upload'])->name('upload');
-        //UploadFile
-        Route::post('/upload/file', [\App\Http\Controllers\Admin\GalleryController::class, 'uploadFile'])->name('uploadFile');
         //Destroy Image
         Route::delete('/{id}/delete', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('destroy');
         Route::delete('/destroy/all', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyAll'])->name('destroyAll');
+        //UploadFile
+        Route::post('/upload/file', [\App\Http\Controllers\Admin\GalleryController::class, 'uploadFile'])->name('uploadFile');
         //Destroy File
         Route::delete('/{id}/delete-file', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyFile'])->name('destroyFile');
         Route::delete('/destroy/all/file', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyAllFile'])->name('destroyAllFile');
