@@ -56,7 +56,7 @@
                                     <td class="p-1">
                                         <ul class="list-unstyled users-list m-0  d-flex align-items-center">
                                             <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="{{--{{json_decode($mag->image)[0]->name.' '.json_decode($mag->image)[0]->size.' '.json_decode($mag->image)[0]->type}}--}}" class="avatar pull-up">
-                                                <img class="media-object rounded-circle" src="@if($mag->image != '[]'){{asset(json_decode($mag->image)[0]->image)}}@endif" alt="Avatar" height="30" width="30">
+                                                <img class="media-object rounded-circle" src="@if($mag->image != '[]'){{asset(json_decode($mag->image)[0]->image)}}@else /images/image.png @endif" alt="Avatar" height="30" width="30">
                                             </li>
                                         </ul>
                                     </td>

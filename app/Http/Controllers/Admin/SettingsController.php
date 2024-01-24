@@ -8,6 +8,7 @@ use App\Models\Fab;
 use App\Models\Link;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -25,60 +26,61 @@ class SettingsController extends Controller
     public function index()
     {
         //Site Data
-        $name = Settings::where('key' , 'name')->pluck('value')->first();
-        $title = Settings::where('key' , 'title')->pluck('value')->first();
-        $logo = Settings::where('key' , 'logo')->pluck('value')->first();
-        $about = Settings::where('key' , 'about')->pluck('value')->first();
-        $address = Settings::where('key' , 'address')->pluck('value')->first();
-        $email = Settings::where('key' , 'email')->pluck('value')->first();
-        $number = Settings::where('key' , 'number')->pluck('value')->first();
-        $fanavari = Settings::where('key' , 'fanavari')->pluck('value')->first();
-        $etemad = Settings::where('key' , 'etemad')->pluck('value')->first();
-        $productId = Settings::where('key' , 'productId')->pluck('value')->first();
+        $name = Settings::where('key', 'name')->pluck('value')->first();
+        $title = Settings::where('key', 'title')->pluck('value')->first();
+        $favicon = Settings::where('key', 'favicon')->pluck('value')->first();
+        $logo = Settings::where('key', 'logo')->pluck('value')->first();
+        $email = Settings::where('key', 'email')->pluck('value')->first();
+        $number = Settings::where('key', 'number')->pluck('value')->first();
+        $address = Settings::where('key', 'address')->pluck('value')->first();
+        $about = Settings::where('key', 'about')->pluck('value')->first();
+        $fanavari = Settings::where('key', 'fanavari')->pluck('value')->first();
+        $etemad = Settings::where('key', 'etemad')->pluck('value')->first();
         //SEO
-        $meta_title = Settings::where('key' , 'meta_title')->pluck('value')->first();
-        $meta_keyword = Settings::where('key' , 'meta_keyword')->pluck('value')->first();
-        $meta_desc = Settings::where('key' , 'meta_desc')->pluck('value')->first();
+        $meta_title = Settings::where('key', 'meta_title')->pluck('value')->first();
+        $meta_keyword = Settings::where('key', 'meta_keyword')->pluck('value')->first();
+        $meta_desc = Settings::where('key', 'meta_desc')->pluck('value')->first();
+        $metas = Settings::where('key', 'metas')->pluck('value')->first();
         //Links
         $links = Link::latest()->get();
         //Payment
-        $zarinpal = Settings::where('key' , 'zarinpal')->pluck('value')->first();
-        $zibal = Settings::where('key' , 'zibal')->pluck('value')->first();
-        $idpay = Settings::where('key' , 'idpay')->pluck('value')->first();
-        $nextpay = Settings::where('key' , 'nextpay')->pluck('value')->first();
-        $terminalBeh = Settings::where('key' , 'terminalBeh')->pluck('value')->first();
-        $userBeh = Settings::where('key' , 'userBeh')->pluck('value')->first();
-        $passwordBeh = Settings::where('key' , 'passwordBeh')->pluck('value')->first();
-        $keySadad = Settings::where('key' , 'keySadad')->pluck('value')->first();
-        $merchantSadad = Settings::where('key' , 'merchantSadad')->pluck('value')->first();
-        $terminalSadad = Settings::where('key' , 'terminalSadad')->pluck('value')->first();
-        $choicePay = Settings::where('key' , 'choicePay')->pluck('value')->first();
-        $cardText = Settings::where('key' , 'cardText')->pluck('value')->first();
-        $installment = Settings::where('key' , 'installment')->pluck('value')->first();
-        $spot = Settings::where('key' , 'spot')->pluck('value')->first();
-        $gateway = Settings::where('key' , 'gateway')->pluck('value')->first();
-        $card = Settings::where('key' , 'card')->pluck('value')->first();
-        $zarinpalStatus = Settings::where('key' , 'zarinpalStatus')->pluck('value')->first();
-        $zibalStatus = Settings::where('key' , 'zibalStatus')->pluck('value')->first();
-        $nextpayStatus = Settings::where('key' , 'nextpayStatus')->pluck('value')->first();
-        $idpayStatus = Settings::where('key' , 'idpayStatus')->pluck('value')->first();
-        $statusBeh = Settings::where('key' , 'statusBeh')->pluck('value')->first();
-        $statusSadad = Settings::where('key' , 'statusSadad')->pluck('value')->first();
+        $zarinpal = Settings::where('key', 'zarinpal')->pluck('value')->first();
+        $zibal = Settings::where('key', 'zibal')->pluck('value')->first();
+        $idpay = Settings::where('key', 'idpay')->pluck('value')->first();
+        $nextpay = Settings::where('key', 'nextpay')->pluck('value')->first();
+        $terminalBeh = Settings::where('key', 'terminalBeh')->pluck('value')->first();
+        $userBeh = Settings::where('key', 'userBeh')->pluck('value')->first();
+        $passwordBeh = Settings::where('key', 'passwordBeh')->pluck('value')->first();
+        $keySadad = Settings::where('key', 'keySadad')->pluck('value')->first();
+        $merchantSadad = Settings::where('key', 'merchantSadad')->pluck('value')->first();
+        $terminalSadad = Settings::where('key', 'terminalSadad')->pluck('value')->first();
+        $choicePay = Settings::where('key', 'choicePay')->pluck('value')->first();
+        $cardText = Settings::where('key', 'cardText')->pluck('value')->first();
+        $installment = Settings::where('key', 'installment')->pluck('value')->first();
+        $spot = Settings::where('key', 'spot')->pluck('value')->first();
+        $gateway = Settings::where('key', 'gateway')->pluck('value')->first();
+        $card = Settings::where('key', 'card')->pluck('value')->first();
+        $zarinpalStatus = Settings::where('key', 'zarinpalStatus')->pluck('value')->first();
+        $zibalStatus = Settings::where('key', 'zibalStatus')->pluck('value')->first();
+        $nextpayStatus = Settings::where('key', 'nextpayStatus')->pluck('value')->first();
+        $idpayStatus = Settings::where('key', 'idpayStatus')->pluck('value')->first();
+        $statusBeh = Settings::where('key', 'statusBeh')->pluck('value')->first();
+        $statusSadad = Settings::where('key', 'statusSadad')->pluck('value')->first();
         //SMS
-        $messageAuth = Settings::where('key' , 'messageAuth')->pluck('value')->first();
-        $messageSuccess = Settings::where('key' , 'messageSuccess')->pluck('value')->first();
-        $messageSuggest = Settings::where('key' , 'messageSuggest')->pluck('value')->first();
-        $messageCancel = Settings::where('key' , 'messageCancel')->pluck('value')->first();
-        $messageBack = Settings::where('key' , 'messageBack')->pluck('value')->first();
-        $messageManager = Settings::where('key' , 'messageManager')->pluck('value')->first();
-        $messageCounseling = Settings::where('key' , 'messageCounseling')->pluck('value')->first();
-        $userSms = Settings::where('key' , 'userSms')->pluck('value')->first();
-        $passSms = Settings::where('key' , 'passSms')->pluck('value')->first();
-        $kaveKey = Settings::where('key' , 'kaveKey')->pluck('value')->first();
-        $typeSms = Settings::where('key' , 'typeSms')->pluck('value')->first();
-        $userFaraz = Settings::where('key' , 'userFaraz')->pluck('value')->first();
-        $passFaraz = Settings::where('key' , 'passFaraz')->pluck('value')->first();
-        $numberFaraz = Settings::where('key' , 'numberFaraz')->pluck('value')->first();
+        $messageAuth = Settings::where('key', 'messageAuth')->pluck('value')->first();
+        $messageSuccess = Settings::where('key', 'messageSuccess')->pluck('value')->first();
+        $messageSuggest = Settings::where('key', 'messageSuggest')->pluck('value')->first();
+        $messageCancel = Settings::where('key', 'messageCancel')->pluck('value')->first();
+        $messageBack = Settings::where('key', 'messageBack')->pluck('value')->first();
+        $messageManager = Settings::where('key', 'messageManager')->pluck('value')->first();
+        $messageCounseling = Settings::where('key', 'messageCounseling')->pluck('value')->first();
+        $userSms = Settings::where('key', 'userSms')->pluck('value')->first();
+        $passSms = Settings::where('key', 'passSms')->pluck('value')->first();
+        $kaveKey = Settings::where('key', 'kaveKey')->pluck('value')->first();
+        $typeSms = Settings::where('key', 'typeSms')->pluck('value')->first();
+        $userFaraz = Settings::where('key', 'userFaraz')->pluck('value')->first();
+        $passFaraz = Settings::where('key', 'passFaraz')->pluck('value')->first();
+        $numberFaraz = Settings::where('key', 'numberFaraz')->pluck('value')->first();
         //SocialMedia
         $socialMedias = Settings::where('social_media', 1)->latest()->get();
 
@@ -86,18 +88,19 @@ class SettingsController extends Controller
             //Site Data
             'name',
             'title',
+            'favicon',
             'logo',
-            'about',
-            'address',
             'email',
             'number',
+            'address',
+            'about',
             'fanavari',
             'etemad',
-            'productId',
             //SEO
             'meta_title',
             'meta_keyword',
             'meta_desc',
+            'metas',
             //Links
             'links',
             //Payment
@@ -147,36 +150,60 @@ class SettingsController extends Controller
     {
         $name = $request->name;
         $title = $request->title;
-        $logo = $request->logo;
-        $about = $request->about;
-        $address = $request->address;
+
+        $siteName = Settings::where('key', 'name')->pluck('value')->first();
+        $favicon = Settings::where('key', 'favicon')->pluck('value')->first();
+        $logo = Settings::where('key', 'logo')->pluck('value')->first();
+
+        $image = $request->file('favicon');
+        if ($request->hasFile('favicon')) {
+            if (File::exists($_SERVER['DOCUMENT_ROOT'].$favicon)) {
+                File::delete($_SERVER['DOCUMENT_ROOT'].$favicon);
+            }
+            $imageName = ($siteName != '')?$siteName:env('APP_NAME').'_'.time().'.'.$image->extension();
+            $image->move($_SERVER['DOCUMENT_ROOT'].'/uploads/site/', $imageName);
+            $favicon = '/uploads/site/'.$imageName;
+        }
+
+        $imageLogo = $request->file('logo');
+        if ($request->hasFile('logo')) {
+            if (File::exists($_SERVER['DOCUMENT_ROOT'].$logo)) {
+                File::delete($_SERVER['DOCUMENT_ROOT'].$logo);
+            }
+            $imageLogoName = ($siteName != '')?$siteName:env('APP_NAME').'_'.time().'.'.$imageLogo->extension();
+            $imageLogo->move($_SERVER['DOCUMENT_ROOT'].'/uploads/site/', $imageLogoName);
+            $logo = '/uploads/site/'.$imageLogoName;
+        }
+
         $email = $request->email;
         $number = $request->number;
+        $address = $request->address;
+        $about = $request->about;
         $fanavari = $request->fanavari;
         $etemad = $request->etemad;
-        $productId = $request->productId;
 
         $array = [
             'name' => $name,
             'title' => $title,
+            'favicon' => $favicon,
             'logo' => $logo,
-            'about' => $about,
-            'address' => $address,
             'email' => $email,
             'number' => $number,
+            'address' => $address,
+            'about' => $about,
             'fanavari' => $fanavari,
             'etemad' => $etemad,
-            'productId' => $productId,
         ];
 
         foreach ($array as $key => $item){
-            $setting = Settings::where('key' , $key)->first();
+            $setting = Settings::where('key', $key)->first();
             if ($setting != ''){
                 $setting->update(['value' => $item]);
             }
         }
 
-        return response()->json();
+        //return response()->json();
+        return redirect(route('admin.settings.index'))->with('success', 'با موفقیت بروزرسانی شد.');
     }
 
     public function seoUpdate(Request $request)
@@ -184,10 +211,12 @@ class SettingsController extends Controller
         $meta_title = $request->meta_title;
         $meta_keyword = $request->meta_keyword;
         $meta_desc = $request->meta_desc;
+        $metas = $request->metas;
         $array = [
             'meta_title' =>$meta_title,
             'meta_keyword' =>$meta_keyword,
             'meta_desc' =>$meta_desc,
+            'metas' =>$metas,
         ];
         foreach ($array as $key=>$item){
             $setting = Settings::where('key', $key)->first();

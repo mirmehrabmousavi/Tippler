@@ -26,6 +26,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <div class="controls">
+                        <label for="site-metas">افزودن متا در صورت نیاز : </label>
+                        <textarea class="form-control" name="metas" id="site-metas" placeholder="">{{$metas}}</textarea>
+                    </div>
+                </div>
+            </div>
             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                 <button type="submit" id="createSeo" class="btn btn-outline-success btn-sm mr-sm-1 mb-1 mb-sm-0 waves-effect waves-light">ذخیره</button>
             </div>
@@ -43,6 +51,7 @@
             var meta_title = $("#site-meta-title").val();
             var meta_keyword = $("#site-meta-keyword").val();
             var meta_desc = $("#site-meta-desc").val();
+            var metas = $("#site-metas").val();
 
             $.ajax({
                 url: "{{route('admin.settings.seoUpdate')}}",
@@ -52,6 +61,7 @@
                     meta_title: meta_title,
                     meta_keyword: meta_keyword,
                     meta_desc: meta_desc,
+                    metas: metas,
                 },
                 success: function (data) {
                     toastr.success('با موفقیت ذخیره شد.');
