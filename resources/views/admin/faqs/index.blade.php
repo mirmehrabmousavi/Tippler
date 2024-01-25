@@ -51,7 +51,7 @@
                                             </td>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{$faq->title}}</td>
-                                            <td>{{jdate($faq->created_at)->format('%A, %d %B %y H:i:s')}}</td>
+                                            <td>{{verta($faq->created_at)->format('%A, %d %B %y H:i:s')}}</td>
                                             <td>
                                                 <a href="{{route('admin.faqs.edit', ['faq' => $faq->id])}}" class="text-secondary mr-1 waves-effect waves-light"><i class="feather icon-edit"></i></a>
                                                 <a class="text-secondary mr-1 waves-effect waves-light text-danger" data-toggle="modal" data-target="#delete-{{$faq->id}}"

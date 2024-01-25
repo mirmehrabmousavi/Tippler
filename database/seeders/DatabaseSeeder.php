@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -88,6 +89,7 @@ class DatabaseSeeder extends Seeder
             'ip_address' => request()->ip(),
             'client_ip_address' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
+            'created_at' => now()->ceilDay(6)
         ]);
         $role = Role::create(['name' => 'Admin']);
         $permissions = Permission::pluck('id','id')->all();
@@ -104,6 +106,7 @@ class DatabaseSeeder extends Seeder
             'ip_address' => request()->ip(),
             'client_ip_address' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
+            'created_at' => now()->ceilDay(2)
         ]);
         User::create([
             'name' => 'User',
@@ -116,6 +119,7 @@ class DatabaseSeeder extends Seeder
             'ip_address' => request()->ip(),
             'client_ip_address' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
+            'created_at' => Carbon::yesterday()
         ]);
     }
 }

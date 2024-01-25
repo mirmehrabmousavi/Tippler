@@ -24,7 +24,7 @@
                                     <tr>
                                         <td>{{$loop->index+1}}</td>
                                         <td>{{$role->name}}</td>
-                                        <td>{{jdate($role->created_at)->format('%A, %d %B %y H:i:s')}}</td>
+                                        <td>{{verta($role->created_at)->format('%A, %d %B %y H:i:s')}}</td>
                                         <td>
                                             <a class="text-secondary mr-1 waves-effect waves-light" data-toggle="modal" data-target="#role-show-{{$role->id}}"><i class="feather icon-eye"></i></a>
                                             <div class="modal fade text-left" id="role-show-{{$role->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true" style="display: none;">
@@ -49,7 +49,7 @@
                                                                 </div>
                                                                 <div class="col-12" style="margin-top: 5px;">
                                                                     <p class="text-center m-0">تاریخ :</p>
-                                                                    <p class="text-center text-white">{{jdate($role->crteated_at)->format('%A, %d %B %y H:i:s')}}</p>
+                                                                    <p class="text-center text-white">{{verta($role->crteated_at)->format('%A, %d %B %y H:i:s')}}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

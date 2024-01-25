@@ -111,7 +111,7 @@
                                                             <p class="mt-1 w-100 alert alert-secondary">
                                                                 <span class="mx-1">کیف پول : 0 تومان</span>
                                                                 <span class="mx-1">مبلغ کل سفارش : 0 تومان</span>
-                                                                <span class="mx-2">زمان ثبت : {{jdate($user->crteated_at)->format('%A, %d %B %y H:i:s')}}</span>
+                                                                <span class="mx-2">زمان ثبت : {{verta($user->crteated_at)->format('%A, %d %B %y H:i:s')}}</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -172,7 +172,7 @@
                                                                 </div>
                                                                 <div class="col-12" style="margin-top: 5px;">
                                                                     <p class="text-center m-0">زمان ثبت :</p>
-                                                                    <p class="text-center text-white">{{jdate($user->crteated_at)->format('%A, %d %B %y H:i:s')}}</p>
+                                                                    <p class="text-center text-white">{{verta($user->crteated_at)->format('%A, %d %B %y H:i:s')}}</p>
                                                                 </div>
 
                                                                 <div class="col-12" style="margin-top: 5px;">

@@ -41,7 +41,6 @@
     <script src="{{asset('js/dropzone.min.js')}}"></script>
     <link href="{{asset('css/toastr.min.css')}}" rel="stylesheet">
     <script src="{{asset('js/toastr.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/kamadatepicker.min.css')}}">
     <!-- END: Custom CSS-->
     @yield('style')
 </head>
@@ -89,9 +88,8 @@
 <!-- END: Page JS-->
 <script src="{{asset('admin/app-assets/js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('admin/app-assets/js/ckeditor/translations/fa.js')}}"></script>
-<script src="{{asset('js/select2.min.js')}}"></script>{{--
-<script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>--}}
-<script src="{{asset('js/kamadatepicker.min.js')}}"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
+<script src="{{asset('js/chart.min.js')}}"></script>
 
 @yield('external-script')
 <script>

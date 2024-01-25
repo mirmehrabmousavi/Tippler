@@ -5,6 +5,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
+                    <div class="col-12">
+                        <a href="#charts" class="btn btn-outline-secondary waves-effect waves-light mb-1"><i class="fa fa-line-chart"></i> نمودار آپلود</a>
+                    </div>
                     <div class="col-md-12 mb-2 mb-md-0">
                         <ul class="nav nav-pills flex-row mt-md-0 mt-1">
                             <li class="nav-item w-50">
@@ -167,22 +170,36 @@
                                         <div class="tab-pane" role="tabpanel" id="files" aria-labelledby="file"
                                              aria-expanded="false">
                                             <div class="card">
-                                                <form id="uploadForm" action="{{route('admin.galleries.uploadFile')}}" method="POST" enctype="multipart/form-data">
-                                                    @csrf
 
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="name">نام فایل* :</label>
-                                                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="نام فایل را وارد کنید" required>
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        عکس هات رو اینجا آپلود کن
+                                                    </h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <label>تعداد فایل آپلود شده: <span class="text-primary">{{count($files)}}</span></label>
+                                                    <label>فایل های قابل آپلود: <span class="text-warning" dir="ltr"> .jpg, .png, .jpeg, .gif, .pdf, .docx, .mp4, .mkv, .zip, .rar</span></label>
+                                                    <label>حداقل حجم قابل آپلود: <span class="text-success" dir="ltr">1 Byte</span></label>
+                                                    <label>حداکثر حجم قابل آپلود: <span class="text-danger" dir="ltr">1000 MB</span></label>
+                                                    <br>
+                                                    <br>
+                                                    <form id="uploadForm" action="{{route('admin.galleries.uploadFile')}}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="name">نام فایل* :</label>
+                                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="نام فایل را وارد کنید" required>
+                                                            </div>
                                                         </div>
+
+                                                        <input type="file" class="dropify" name="file" id="fileInput">
+                                                        <button type="submit" id="btnUpload" class="btn btn-outline-success waves-effect mt-1"><i class="fa fa-upload"></i> بارگذاری اطلاعات</button>
+                                                    </form>
+
+                                                    <div id="progressBar" class="progress progress-bar-success progress-lg mt-1">
+                                                        <div id="progress" class="progress-bar" role="progressbar" style="width:0%; height: 15px;"><span id="percentLabel" class="text-white"></span></div>
                                                     </div>
-
-                                                    <input type="file" class="dropify" name="file" id="fileInput">
-                                                    <button type="submit" id="btnUpload" class="btn btn-outline-success waves-effect mt-1"><i class="fa fa-upload"></i> بارگذاری اطلاعات</button>
-                                                </form>
-
-                                                <div id="progressBar" class="progress progress-bar-success progress-lg mt-1">
-                                                    <div id="progress" class="progress-bar" role="progressbar" style="width:0%; height: 15px;"><span id="percentLabel" class="text-white"></span></div>
                                                 </div>
 
                                                 <hr>
@@ -222,6 +239,8 @@
                                                                             <img src="{{asset($file->url)}}" class="card-img" alt="card-img-6" height="250">
                                                                         @elseif($file->type === 'mp4' or $file->type === 'mkv' or $file->type == '')
                                                                             <video src="{{asset($file->url)}}" class="card-img" height="250"></video>
+                                                                        @else
+                                                                            <img src="{{asset('images/file.png')}}" class="card-img" alt="card-img-6" height="250">
                                                                         @endif
                                                                         <div class="card-img-overlay overlay-black">
                                                                             <script>
@@ -295,7 +314,6 @@
                                                         {{$files->links('admin.pagination.paginate')}}
                                                     </div>
                                                 @endif
-
                                             </div>
                                         </div>
                                     </div>
@@ -306,13 +324,120 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row" id="charts">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">نمودار زمانی آپلود سال جاری</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart" height="100px"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
-
-
 @endsection
 
 @section('script')
+    <script>
+        var farvardinGallery = {!! json_encode($farvardinGallery, JSON_HEX_TAG) !!};
+        var ordibeheshtGallery = {!! json_encode($ordibeheshtGallery, JSON_HEX_TAG) !!};
+        var khordadGallery = {!! json_encode($khordadGallery, JSON_HEX_TAG) !!};
+        var tirGallery = {!! json_encode($tirGallery, JSON_HEX_TAG) !!};
+        var mordadGallery = {!! json_encode($mordadGallery, JSON_HEX_TAG) !!};
+        var shahrivarGallery = {!! json_encode($shahrivarGallery, JSON_HEX_TAG) !!};
+        var mehrGallery = {!! json_encode($mehrGallery, JSON_HEX_TAG) !!};
+        var abanGallery = {!! json_encode($abanGallery, JSON_HEX_TAG) !!};
+        var azarGallery = {!! json_encode($azarGallery, JSON_HEX_TAG) !!};
+        var deyGallery = {!! json_encode($deyGallery, JSON_HEX_TAG) !!};
+        var bahmanGallery = {!! json_encode($bahmanGallery, JSON_HEX_TAG) !!};
+        var esfandGallery = {!! json_encode($esfandGallery, JSON_HEX_TAG) !!};
+
+        var farvardinFile = {!! json_encode($farvardinFile, JSON_HEX_TAG) !!};
+        var ordibeheshtFile = {!! json_encode($ordibeheshtFile, JSON_HEX_TAG) !!};
+        var khordadFile = {!! json_encode($khordadFile, JSON_HEX_TAG) !!};
+        var tirFile = {!! json_encode($tirFile, JSON_HEX_TAG) !!};
+        var mordadFile = {!! json_encode($mordadFile, JSON_HEX_TAG) !!};
+        var shahrivarFile = {!! json_encode($shahrivarFile, JSON_HEX_TAG) !!};
+        var mehrFile = {!! json_encode($mehrFile, JSON_HEX_TAG) !!};
+        var abanFile = {!! json_encode($abanFile, JSON_HEX_TAG) !!};
+        var azarFile = {!! json_encode($azarFile, JSON_HEX_TAG) !!};
+        var deyFile = {!! json_encode($deyFile, JSON_HEX_TAG) !!};
+        var bahmanFile = {!! json_encode($bahmanFile, JSON_HEX_TAG) !!};
+        var esfandFile = {!! json_encode($esfandFile, JSON_HEX_TAG) !!};
+
+        const labels = [
+            'فروردین',
+            'اردیبهشت',
+            'خرداد',
+            'تیر',
+            'مرداد',
+            'شهریور',
+            'مهر',
+            'آبان',
+            'آذر',
+            'دی',
+            'بهمن',
+            'اسفند',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'تصاویر',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [
+                        farvardinGallery,
+                        ordibeheshtGallery,
+                        khordadGallery,
+                        tirGallery,
+                        mordadGallery,
+                        shahrivarGallery,
+                        mehrGallery,
+                        abanGallery,
+                        azarGallery,
+                        deyGallery,
+                        bahmanGallery,
+                        esfandGallery,
+                    ],
+                },
+                {
+                    label: 'فایل ها',
+                    borderColor: '#3161d7',
+                    backgroundColor: '#1b3b8a',
+                    data: [
+                        farvardinFile,
+                        ordibeheshtFile,
+                        khordadFile,
+                        tirFile,
+                        mordadFile,
+                        shahrivarFile,
+                        mehrFile,
+                        abanFile,
+                        azarFile,
+                        deyFile,
+                        bahmanFile,
+                        esfandFile,
+                    ],
+                }
+            ]
+        }
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
         var dropzone = new Dropzone('#image-upload', {

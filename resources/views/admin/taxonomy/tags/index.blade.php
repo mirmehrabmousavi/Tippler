@@ -73,7 +73,7 @@
                                     <td>{{$loop->index+1}}</td>
                                     <td>{{$tag->name}}</td>
                                     <td><span class="badge" style="background: {{($tag->type == 'product')? 'darkblue' : ''}}{{($tag->type == 'mag')? 'darkred' : ''}}{{($tag->type == 'page')? 'darkgreen' : ''}}">{{($tag->type == 'product')? 'محصول' : ''}}{{ ($tag->type == 'mag')? 'مقاله': ''}} {{($tag->type == 'page')? 'صفحه': ''}}</span></td>
-                                    <td>{{jdate($tag->created_at)->ago()}}</td>
+                                    <td>{{verta($tag->crteated_at)->format('%A, %d %B %y H:i:s')}}</td>
                                     <td>
                                         <a class="text-secondary mr-1 waves-effect waves-light" data-toggle="modal" data-target="#show-{{$tag->id}}"><i class="feather icon-eye"></i></a>
                                         <div class="modal fade text-left" id="show-{{$tag->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true" style="display: none;">
