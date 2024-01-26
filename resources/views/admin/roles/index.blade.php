@@ -41,9 +41,21 @@
                                                                 </div>
                                                                 <div class="col-12" style="margin-top: 5px;">
                                                                     <p class="text-center m-0">مجوز ها :</p>
-                                                                    <p class="text-center text-white">
-                                                                        @foreach($permission as $value)
-                                                                            <span class="badge badge-dark">{{$value->name}}</span>
+                                                                    <p class="text-center text-white" dir="ltr">
+                                                                        @php
+                                                                            $permissionsID = DB::table("role_has_permissions")->where("role_id", $role->id)->get();
+                                                                        @endphp
+                                                                        @foreach($permissionsID as $value)
+                                                                            @php
+                                                                                $rolePermissions = DB::table('permissions')->where('id', $value->permission_id)->get();
+                                                                            @endphp
+                                                                            @foreach($rolePermissions as $val)
+                                                                                @if(str_contains($val->name, 'list'))
+                                                                                    <br>
+                                                                                    <span>{{str_replace('-list', '', $val->name)}} -> </span>
+                                                                                @endif
+                                                                                <span class="badge badge-dark">{{$val->name}}</span>
+                                                                            @endforeach
                                                                         @endforeach
                                                                     </p>
                                                                 </div>
@@ -89,12 +101,19 @@
                                                                             <br>
                                                                             <div class="row">
                                                                                 @foreach($permission as $value)
+                                                                                    @if(str_contains($value->name, 'delete'))
+                                                                                        <br><br>
+                                                                                    @endif
                                                                                     <div class="col-6">
                                                                                         <fieldset>
                                                                                             <div class="custom-control custom-checkbox">
-                                                                                                @php $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$role->id)->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')->all(); @endphp
-                                                                                                <input type="checkbox" class="custom-control-input edit-permissions" value="{{$value->id}}" name="permission[]" id="role-permission-{{$value->id}}" {{$rolePermissions === $value->id ? 'checked' : ''}}>
-                                                                                                <label class="custom-control-label" for="role-permission-{{$value->id}}">{{$value->name}}</label>
+                                                                                                @php
+                                                                                                    $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$role->id)
+                                                                                                                        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+                                                                                                                        ->all();
+                                                                                                @endphp
+                                                                                                <input type="checkbox" class="custom-control-input edit-permissions" value="{{$value->id}}" name="permission[]" id="role-permission-edit-{{$value->id}}" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
+                                                                                                <label class="custom-control-label" for="role-permission-edit-{{$value->id}}">{{$value->name}}</label>
                                                                                             </div>
                                                                                         </fieldset>
                                                                                     </div>
@@ -183,7 +202,7 @@
                                                     <div class="col-6">
                                                         <fieldset>
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input permissions" value="{{$value->id}}" name="permission[]" id="role-permission-{{$value->id}}">
+                                                                <input type="checkbox" class="custom-control-input permissions" value="{{$value->id}}" name="permissions[]" id="role-permission-{{$value->id}}" multiple>
                                                                 <label class="custom-control-label" for="role-permission-{{$value->id}}">{{$value->name}}</label>
                                                             </div>
                                                         </fieldset>

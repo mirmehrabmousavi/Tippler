@@ -19,6 +19,7 @@ class RoleController extends Controller
     {
         $roles = Role::latest()->paginate(50);
         $permission = Permission::all();
+
         return view('admin.roles.index', compact('roles', 'permission'));
     }
 
@@ -31,11 +32,20 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
+            'permissions' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $role = Role::create(['name' => $request->name]);
+
+        $permissions = $request->input('permissions');
+
+        $permissions = array_map(function ($item) {
+            return (int)$item;
+        }, $permissions);
+
+        if (!empty($permissions)){
+            $role->syncPermissions($permissions);
+        }
 
         return redirect()->back()->with('success', 'با موفقیت ثبت شد.');
     }
@@ -52,16 +62,21 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
-        ]);
-
         $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+        if ($request->has('name')) {
+            $role->name = $request->input('name');
+            $role->save();
+        }
 
-        $role->syncPermissions($request->input('permission'));
+        $permissions = $request->input('permission');
+
+        $permissions = array_map(function ($item) {
+            return (int)$item;
+        }, $permissions);
+
+        if (!empty($permissions)){
+            $role->syncPermissions($permissions);
+        }
 
         return redirect()->back()->with('success', 'با موفقیت بروزرسانی شد.');
     }

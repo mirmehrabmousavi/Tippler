@@ -7,10 +7,10 @@
        <div class="col-md-12">
            <div class="card">
                <div class="card-header">
-                   <h4 class="card-title"><i class="fa fa-users"></i> کاربران</h4>
+                   <h4 class="card-title"><i class="fa fa-users"></i> کاربران {{verta()->year}}</h4>
                </div>
                <div class="card-body">
-                   <canvas id="myChart" height="100px"></canvas>
+                   <canvas id="UsersChart" height="100px"></canvas>
                </div>
            </div>
        </div>
@@ -142,8 +142,8 @@
             options: {}
         };
 
-        const myChart = new Chart(
-            document.getElementById('myChart'),
+        const UsersChart = new Chart(
+            document.getElementById('UsersChart'),
             config
         );
     </script>
