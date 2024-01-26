@@ -22,6 +22,16 @@
                                                 <label for="main_name">نام* :</label>
                                                 <input type="text" name="name" value="{{$category->name}}" id="main_name" class="form-control @error('name') is-invalid @enderror" placeholder="نام را وارد کنید">
                                             </div>
+                                        </div> <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="main_parent_id">والد</label>
+                                                <select id="main_parent_id" class="form-control @error('parent_id') is-invalid @enderror disabled" name="parent_id" disabled>
+                                                    <option value="">بدون دسته بندی</option>
+                                                    @foreach($categories as $k => $v)
+                                                        <option value="{{ $v['id'] }}" >{{ $v['name'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
@@ -38,7 +48,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        @include('admin.galleries.file-manager-mini')
+                                        @include('admin.galleries.file-manager')
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="main_description">توضیحات* :</label>

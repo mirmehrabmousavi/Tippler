@@ -27,14 +27,10 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/pages/dashboard-analytics.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/pages/card-analytics.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/plugins/tour/tour.css')}}">
     <!-- END: Page CSS-->
     @yield('external-style')
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/custom-rtl.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/css/style-rtl.css')}}">
     <script src="{{asset('admin/app-assets/js/core/libraries/jquery.min.js')}}"></script>
     <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/dropzone.min.css')}}"/>

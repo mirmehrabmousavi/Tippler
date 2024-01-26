@@ -55,7 +55,7 @@
                                                 <textarea id="main_description" name="description" class="form-control ckeditor"></textarea>
                                             </div>
                                         </div>
-                                        @include('admin.galleries.file-manager-mini')
+                                        @include('admin.galleries.file-manager')
                                         <div class="form-group col-12">
                                             <a id="showMeta" class="text-secondary mr-1 waves-effect waves-light rounded-pill" style="padding: 5px"><i class="feather icon-plus-circle"></i> افزودن متا</a>
                                         </div>

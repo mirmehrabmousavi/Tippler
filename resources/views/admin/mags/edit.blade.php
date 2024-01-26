@@ -73,7 +73,7 @@
                                         <label for="category">دسته بندی :</label>
                                         <select name="categories" id="category" class="form-control" multiple="multiple">
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}"  {{ in_array($category->id, $selectedCats) ? 'selected' : '' }}>{{$category->name}}</option>
+                                                <option value="{{$category->id}}" {{ in_array($category->id, $selectedCats) ? 'selected' : '' }}>{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
