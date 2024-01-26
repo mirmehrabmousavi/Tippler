@@ -176,7 +176,12 @@ class  GalleryController extends Controller
         }else {
             $size = round($sizeFile) . 'KB';
         }
-        $fileName = ($siteName != '')?$siteName:env('APP_NAME').'_'.$request['name'].'.'.$file->extension();
+        if ($request['name']) {
+            $name = $request['name'];
+        }else{
+            $name = $file->getClientOriginalName();
+        }
+        $fileName = ($siteName != '')?$siteName:env('APP_NAME').'_'.$name.'.'.$file->extension();
         $path = $file->move($_SERVER['DOCUMENT_ROOT'].'/uploads/files/' ,$fileName);
         Gallery::create([
             'user_id' => Auth::id(),

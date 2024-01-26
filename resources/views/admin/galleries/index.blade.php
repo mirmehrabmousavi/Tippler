@@ -189,7 +189,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="name">نام فایل* :</label>
-                                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="نام فایل را وارد کنید" required>
+                                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="نام فایل را وارد کنید">
                                                             </div>
                                                         </div>
 
