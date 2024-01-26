@@ -29,11 +29,6 @@ class DatabaseSeeder extends Seeder
             'user-edit',
             'user-delete',
 
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-
             'mag-list',
             'mag-create',
             'mag-edit',
@@ -63,6 +58,11 @@ class DatabaseSeeder extends Seeder
             'faq-create',
             'faq-edit',
             'faq-delete',
+
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete',
 
             'gallery-list',
             'gallery-create',

@@ -112,8 +112,8 @@
                                                                                                                         ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
                                                                                                                         ->all();
                                                                                                 @endphp
-                                                                                                <input type="checkbox" class="custom-control-input edit-permissions" value="{{$value->id}}" name="permission[]" id="role-permission-edit-{{$value->id}}" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
-                                                                                                <label class="custom-control-label" for="role-permission-edit-{{$value->id}}">{{$value->name}}</label>
+                                                                                                <input type="checkbox" class="custom-control-input edit-permissions" value="{{$value->id}}" name="permission[]" id="role-permission-edit-{{$role->name}}-{{$value->id}}" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }} multiple>
+                                                                                                <label class="custom-control-label" for="role-permission-edit-{{$role->name}}-{{$value->id}}">{{$value->name}}</label>
                                                                                             </div>
                                                                                         </fieldset>
                                                                                     </div>

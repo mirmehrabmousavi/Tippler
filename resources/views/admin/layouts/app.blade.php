@@ -10,33 +10,33 @@
     <link rel="icon" type="image/png" sizes="56x56" href="#">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/app.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/app.css')}}">
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/css/vendors-rtl.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/css/extensions/tether-theme-arrows.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/css/extensions/tether.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/vendors/css/extensions/shepherd-theme-default.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/vendors-rtl.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/tether-theme-arrows.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/tether.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/shepherd-theme-default.css')}}">
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/bootstrap-extended.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/colors.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/components.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/themes/black-layout.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/themes/semi-dark-layout.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-extended.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/colors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/components.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/themes/black-layout.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/themes/semi-dark-layout.css')}}">
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/colors/palette-gradient.css')}}">
     <!-- END: Page CSS-->
     @yield('external-style')
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/app-assets/css-rtl/custom-rtl.css')}}">
-    <script src="{{asset('admin/app-assets/js/core/libraries/jquery.min.js')}}"></script>
-    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('css/dropzone.min.css')}}"/>
-    <script src="{{asset('js/dropzone.min.js')}}"></script>
-    <link href="{{asset('css/toastr.min.css')}}" rel="stylesheet">
-    <script src="{{asset('js/toastr.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/custom-rtl.css')}}">
+    <script src="{{asset('admin/js/core/libraries/jquery.min.js')}}"></script>
+    <link href="{{asset('admin/css/select2.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('admin/css/dropzone.min.css')}}"/>
+    <script src="{{asset('admin/js/dropzone.min.js')}}"></script>
+    <link href="{{asset('admin/css/toastr.min.css')}}" rel="stylesheet">
+    <script src="{{asset('admin/js/toastr.min.js')}}"></script>
     <!-- END: Custom CSS-->
     @yield('style')
 </head>
@@ -66,26 +66,26 @@
 
 @include('admin.layouts.footer')
 
-<script src="{{asset('js/jquery-3.6.1.min.js')}}"></script>
+<script src="{{asset('admin/js/jquery-3.6.1.min.js')}}"></script>
 <!-- BEGIN: Vendor JS-->
-<script src="{{asset('admin/app-assets/vendors/js/vendors.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/vendors.min.js')}}"></script>
 <!-- BEGIN Vendor JS-->
 <!-- BEGIN: Page Vendor JS-->
-<script src="{{asset('admin/app-assets/vendors/js/extensions/tether.min.js')}}"></script>
-<script src="{{asset('admin/app-assets/vendors/js/extensions/shepherd.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/extensions/tether.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/extensions/shepherd.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
-<script src="{{asset('admin/app-assets/js/core/app-menu.js')}}"></script>
-<script src="{{asset('admin/app-assets/js/core/app.js')}}"></script>
-<script src="{{asset('admin/app-assets/js/scripts/components.js')}}"></script>
+<script src="{{asset('admin/js/core/app-menu.js')}}"></script>
+<script src="{{asset('admin/js/core/app.js')}}"></script>
+<script src="{{asset('admin/js/scripts/components.js')}}"></script>
 <!-- END: Theme JS-->
 <!-- BEGIN: Page JS-->
-<script src="{{asset('admin/app-assets/js/scripts/popover/popover.js')}}"></script>
+<script src="{{asset('admin/js/scripts/popover/popover.js')}}"></script>
 <!-- END: Page JS-->
-<script src="{{asset('admin/app-assets/js/ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('admin/app-assets/js/ckeditor/translations/fa.js')}}"></script>
-<script src="{{asset('js/select2.min.js')}}"></script>
-<script src="{{asset('js/chart.min.js')}}"></script>
+<script src="{{asset('admin/js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('admin/js/ckeditor/translations/fa.js')}}"></script>
+<script src="{{asset('admin/js/select2.min.js')}}"></script>
+<script src="{{asset('admin/js/chart.min.js')}}"></script>
 
 @yield('external-script')
 <script>
