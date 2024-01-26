@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/toastr.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/dropify.min.css')}}">
+
+    <script src="{{asset('admin/js/jquery-3.6.1.min.js')}}"></script>
     @yield('external-style')
     @yield('style')
 </head>
@@ -54,7 +56,7 @@
 
 @include('admin.layouts.footer')
 
-<script src="{{asset('admin/js/jquery-3.6.1.min.js')}}"></script>
+
 <script src="{{asset('admin/vendors/js/vendors.min.js')}}"></script>
 <script src="{{asset('admin/js/core/app-menu.js')}}"></script>
 <script src="{{asset('admin/js/core/app.js')}}"></script>
