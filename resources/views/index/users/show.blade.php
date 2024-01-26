@@ -8,20 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-<a href="{{route('login')}}">Login</a>
-
-<form action="{{route('logout')}}" method="POST">
-    @csrf
-    <button type="submit">Logout</button>
-</form>
-
-<hr>
-
-<ul>
-    @foreach($users as $user)
-        <li><a href="{{ '/@'.$user->username }}">{{$user->email}}</a></li>
-    @endforeach
-</ul>
-
+    <ul>
+        <li>{{$user->name}}</li>
+        <li>{{$user->username}}</li>
+        <li>{{$user->email}}</li>
+    </ul>
 </body>
 </html>

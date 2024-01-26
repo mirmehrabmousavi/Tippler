@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 //Index
 Route::group(['prefix' => '/', 'as' => 'index.'], function() {
     Route::get('/', [\App\Http\Controllers\Index\IndexController::class, 'index'])->name('index');
+    //Users
+    Route::get('/@{username}', [\App\Http\Controllers\Index\IndexController::class, 'getUserByUsername']);
     Route::get('/FAQ', [\App\Http\Controllers\Index\IndexController::class, 'faq'])->name('faq');
     Route::get('/about', [\App\Http\Controllers\Index\IndexController::class, 'about'])->name('about');
     Route::get('/contactus', [\App\Http\Controllers\Index\IndexController::class, 'contactus'])->name('contactus');
