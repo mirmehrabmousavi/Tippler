@@ -1,19 +1,26 @@
-@if(session()->has('primary'))
-    <div class="alert alert-primary"><i class="fa fa-info-circle"></i> {{session()->get('primary')}}</div>
-@endif
+<script>
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-left',
+        timeOut: 7000, // 7 seconds
+        extendedTimeOut: 1000, // 1 second after hover
+        showEasing: 'swing',
+        hideEasing: 'linear',
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut'
+    };
+    @if(session()->has('success'))
+    toastr.success('{{session()->get('success')}}')
+    @endif
+    @if(session()->has('error'))
+    toastr.error('{{session()->get('error')}}')
+    @endif
+    @if(session()->has('info'))
+    toastr.info('{{session()->get('info')}}')
+    @endif
+    @if(session()->has('warning'))
+    toastr.warning('{{session()->get('warning')}}')
+    @endif
+</script>
 
-@if(session()->has('success'))
-    <div class="alert alert-success"><i class="fa fa-info-circle"></i> {{session()->get('success')}}</div>
-@endif
-
-@if(session()->has('info'))
-    <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{session()->get('info')}}</div>
-@endif
-
-@if(session()->has('warning'))
-    <div class="alert alert-warning"><i class="fa fa-info-circle"></i> {{session()->get('warning')}}</div>
-@endif
-
-@if(session()->has('failed'))
-    <div class="alert alert-danger"><i class="fa fa-info-circle"></i> {{session()->get('failed')}}</div>
-@endif

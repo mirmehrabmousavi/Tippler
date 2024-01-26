@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="rtl">
-<!-- BEGIN: Head-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>{{env('APP_NAME')}} - Admin @yield('title')</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="56x56" href="#">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <title>{{($title)?$title:env('APP_NAME')}} - Admin {{$url1.' '.$url2}}</title>
+    <link rel="icon" type="image/png" sizes="56x56" href="{{($ico)? $ico : asset('images/image.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/vendors-rtl.min.css')}}">
@@ -27,16 +24,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/dropify.min.css')}}">
 
     <script src="{{asset('admin/js/jquery-3.6.1.min.js')}}"></script>
+
     @yield('external-style')
     @yield('style')
 </head>
 <body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
 
 @include('admin.layouts.header')
-
 @include('admin.layouts.aside')
 
-<!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -44,18 +40,15 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-            @include('notifications.notification')
             @yield('content')
         </div>
     </div>
 </div>
-<!-- END: Content-->
 
 <div class="sidenav-overlay"></div>
-<div class="drag-target"></div>
+<div class="drag-target"></div
 
 @include('admin.layouts.footer')
-
 
 <script src="{{asset('admin/vendors/js/vendors.min.js')}}"></script>
 <script src="{{asset('admin/js/core/app-menu.js')}}"></script>
@@ -70,21 +63,9 @@
 <script src="{{asset('admin/js/toastr.min.js')}}"></script>
 <script src="{{asset('admin/js/dropify.min.js')}}"></script>
 
-@yield('external-script')
-<script>
-    toastr.options = {
-        closeButton: true,
-        progressBar: true,
-        positionClass: 'toast-bottom-left',
-        timeOut: 3000, // 3 seconds
-        extendedTimeOut: 1000, // 1 second after hover
-        showEasing: 'swing',
-        hideEasing: 'linear',
-        showMethod: 'fadeIn',
-        hideMethod: 'fadeOut'
-    };
-</script>
+@include('notifications.notification')
 @yield('script')
+@yield('external-script')
+
 </body>
-<!-- END: Body-->
 </html>
