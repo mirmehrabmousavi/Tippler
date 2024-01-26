@@ -11,14 +11,14 @@
                     <div class="col-md-12 mb-2 mb-md-0">
                         <ul class="nav nav-pills flex-row mt-md-0 mt-1">
                             <li class="nav-item w-50">
-                                <a class="nav-link d-flex py-75 active" id="image" data-toggle="pill" href="#images"
+                                <a class="nav-link d-flex py-75 {{(request()->tab == 'gallery')? 'active' : ''}}" id="image" data-toggle="pill" href="#images"
                                    aria-expanded="true">
                                     <i class="fa fa-picture-o mr-50 font-medium-3"></i>
                                     گالری تصاویر
                                 </a>
                             </li>
                             <li class="nav-item w-50">
-                                <a class="nav-link d-flex py-75" id="file" data-toggle="pill" href="#files"
+                                <a class="nav-link d-flex py-75 {{(request()->tab == 'file')? 'active' : ''}}" id="file" data-toggle="pill" href="#files"
                                    aria-expanded="false">
                                     <i class="fa fa-file-excel-o mr-50 font-medium-3"></i>
                                     فایل های حجیم
@@ -32,7 +32,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active show" role="tabpanel" id="images"
+                                        <div class="tab-pane {{(request()->tab == 'gallery')? 'active' : ' fade'}}" role="tabpanel" id="images"
                                              aria-labelledby="image" aria-expanded="true">
                                             <div class="card">
                                                 <div class="row">
@@ -40,7 +40,7 @@
                                                         <div class="card">
                                                             <div class="card-header">
                                                                 <h4 class="card-title">عکس هات رو اینجا آپلود کن</h4>
-                                                                <p class="text-left float-left">تعداد تصاویر : <span class="badge badge-primary rounded-pill">{{count($galleries)}}</span></p>
+                                                                <p class="text-left float-left">تعداد تصاویر : <span class="text-primary">{{count($galleries)}}</span></p>
                                                             </div>
                                                             <div class="card-content">
                                                                 <div class="card-body">
@@ -167,7 +167,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="tab-pane" role="tabpanel" id="files" aria-labelledby="file"
+                                        <div class="tab-pane {{(request()->tab == 'file')? 'active' : ' fade'}}" role="tabpanel" id="files" aria-labelledby="file"
                                              aria-expanded="false">
                                             <div class="card">
 
@@ -447,7 +447,7 @@
             acceptedFiles: ".jpeg,.jpg,.png,.gif,.mp4,.mkv"
         });
         dropzone.on("complete", function(file) {
-            window.location.href = '{{route('admin.galleries.index')}}'
+            window.location.href = '{{route('admin.galleries.index', 'tab=gallery')}}'
         });
 
         $('.delete_all').hide()
@@ -494,7 +494,7 @@
                                     $(this).parents("parent").remove();
                                 });
                                 //alert(data['success']);
-                                window.location.href='/admin/galleries'
+                                window.location.href='/admin/galleries?tab=gallery'
                             } else if (data['error']) {
                                 alert(data['error']);
                             } else {
@@ -509,9 +509,6 @@
             }
         });
     </script>
-
-    <link rel="stylesheet" type="text/css" href="{{asset('css/dropify.min.css')}}">
-    <script type="text/javascript" src="{{asset('js/dropify.min.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('.dropify').dropify({
@@ -567,7 +564,7 @@
                                         $(this).parents("parent").remove();
                                     });
                                     //alert(data['success']);
-                                    window.location.href='/admin/galleries'
+                                    window.location.href='/admin/galleries?tab=file'
                                 } else if (data['error']) {
                                     alert(data['error']);
                                 } else {
@@ -625,11 +622,11 @@
                         success: function(response) {
                             progressBar.hide()
                             console.log(response);
-                            window.location.href='/admin/galleries/'
+                            window.location.href='/admin/galleries?tab=file'
                             // Handle success, if needed
                         },
                         error: function(error) {
-                            console.error('Error:', error);
+                            toastr.error('لطفا فایل های مجاز را آپلود کنید')
                             btnUpload.text('اپلود فایل');
                             // Handle error, if needed
                         },

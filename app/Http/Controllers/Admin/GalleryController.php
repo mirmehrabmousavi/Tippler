@@ -141,7 +141,7 @@ class  GalleryController extends Controller
         if (File::exists($_SERVER['DOCUMENT_ROOT'].$gallery->url)) {
             $gallery->delete();
             File::delete($_SERVER['DOCUMENT_ROOT'].$gallery->url);
-            return redirect(route('admin.galleries.index'));
+            return redirect(route('admin.galleries.index', 'tab=gallery'));
         }else{
             dd('file not exists');
         }
@@ -197,7 +197,7 @@ class  GalleryController extends Controller
         if (File::exists($_SERVER['DOCUMENT_ROOT'].$file->url)) {
             $file->delete();
             File::delete($_SERVER['DOCUMENT_ROOT'].$file->url);
-            return redirect(route('admin.galleries.index'));
+            return redirect(route('admin.galleries.index', 'tab=file'));
         }else{
             dd('file not exists');
         }
